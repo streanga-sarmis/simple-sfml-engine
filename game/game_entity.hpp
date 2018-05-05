@@ -15,18 +15,22 @@
 
 #pragma once
 
-#define TILE_SIZE 16
-
 #include <SFML/Graphics.hpp>
 
-#include "game_utils.hpp"
+#include "game_map.hpp"
+#include "game_textures.hpp"
 
-class Textures {
+class Entity {
+protected:
+	unsigned index; // unique accross entities
+	sf::IntRect bounds;
+	sf::Vector2i velocity;
+
 public:
-	sf::Texture TILES[15 + 2]; // 15 walls and 2 floors
+	virtual void touchedEntity(Entity* other) = 0;
+	virtual void update(sf::RenderWindow* window, Map& map) = 0;
+	virtual void render(sf::RenderWindow* window, Textures& textures) = 0;
 
-	Textures();
-	~Textures();
-
-	void loadTexture(sf::Texture& texture, const char* path, const sf::IntRect& rect);
+	friend class EntityManager;
+	friend class Level;
 };

@@ -51,6 +51,18 @@
     <ClCompile Include="game_level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game_entity_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_pause_state.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_csv_parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_window.hpp">
@@ -93,6 +105,21 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="game_level.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_manager.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_player.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_pause_state.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_csv_parser.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

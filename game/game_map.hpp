@@ -19,13 +19,16 @@
 
 #include "game_tile.hpp"
 #include "game_screen.hpp"
+#include "game_textures.hpp"
+#include "game_csv_parser.hpp"
 
 class Map {
 private:
-	sf::Texture texture[2];
 	unsigned width;
 	unsigned height;
 	Tile* tiles;
+	Tile* overlayTiles;
+	Tile* collisionTiles;
 
 public:
 	bool loaded;
@@ -37,6 +40,8 @@ public:
 	void generateTerrain();
 	void setTile(Tile tile, int position);
 	Tile getTile(Tile tile, int position);
-	void renderTile(sf::RenderWindow* window, unsigned char type, int x, int y);
-	void render(sf::RenderWindow* window, int xOffset, int yOffset);
+	void mapRolesToTiles();
+	void renderTile(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y);
+	void renderOverlay(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1);
+	void render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1);
 };

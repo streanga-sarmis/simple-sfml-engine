@@ -15,18 +15,19 @@
 
 #pragma once
 
-#define TILE_SIZE 16
+#include <fstream>
 
-#include <SFML/Graphics.hpp>
-
-#include "game_utils.hpp"
-
-class Textures {
+class CSVParser {
+private:
+	struct Data {
+		char* values;
+		unsigned width;
+		unsigned height;
+	};
 public:
-	sf::Texture TILES[15 + 2]; // 15 walls and 2 floors
 
-	Textures();
-	~Textures();
-
-	void loadTexture(sf::Texture& texture, const char* path, const sf::IntRect& rect);
+	static Data parseFileToData(const char* path);
+	static void clearData(Data& data);
+	
+	friend class Map;
 };

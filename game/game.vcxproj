@@ -130,11 +130,15 @@
   <ItemGroup>
     <ClCompile Include="game_app.cpp" />
     <ClCompile Include="game_button.cpp" />
+    <ClCompile Include="game_csv_parser.cpp" />
+    <ClCompile Include="game_entity_manager.cpp" />
+    <ClCompile Include="game_entity_player.cpp" />
     <ClCompile Include="game_level.cpp" />
     <ClCompile Include="game_main.cpp" />
     <ClCompile Include="game_map.cpp" />
     <ClCompile Include="game_map_loading_state.cpp" />
     <ClCompile Include="game_menu_state.cpp" />
+    <ClCompile Include="game_pause_state.cpp" />
     <ClCompile Include="game_play_state.cpp" />
     <ClCompile Include="game_screen.cpp" />
     <ClCompile Include="game_state_machine.cpp" />
@@ -144,10 +148,15 @@
   <ItemGroup>
     <ClInclude Include="game_app.hpp" />
     <ClInclude Include="game_button.hpp" />
+    <ClInclude Include="game_csv_parser.hpp" />
+    <ClInclude Include="game_entity.hpp" />
+    <ClInclude Include="game_entity_manager.hpp" />
+    <ClInclude Include="game_entity_player.hpp" />
     <ClInclude Include="game_level.hpp" />
     <ClInclude Include="game_map.hpp" />
     <ClInclude Include="game_map_loading_state.hpp" />
     <ClInclude Include="game_menu_state.hpp" />
+    <ClInclude Include="game_pause_state.hpp" />
     <ClInclude Include="game_play_state.hpp" />
     <ClInclude Include="game_screen.hpp" />
     <ClInclude Include="game_state.hpp" />

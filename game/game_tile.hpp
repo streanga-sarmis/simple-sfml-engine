@@ -17,8 +17,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class Tile {
-public:
+struct Tile {
 	unsigned char type;
-	bool solid;
+	bool solid;// almost useless to have now...
 };

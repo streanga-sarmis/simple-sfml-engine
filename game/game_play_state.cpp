@@ -17,7 +17,6 @@
 
 PlayState::PlayState(Map* map):
 level(new Level(map)){
-	
 }
 
 PlayState::~PlayState() {
@@ -29,9 +28,14 @@ void PlayState::checkMouseClicked(sf::RenderWindow* window, sf::Event& event) {
 }
 
 void PlayState::update(sf::RenderWindow* window) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+		StateMachine::pushState(new PauseState());
+	}
 	level->update(window);
 }
 
 void PlayState::render(sf::RenderWindow* window) {
-	level->render(window);
+	window->clear(sf::Color::Black);
+
+	level->render(window, textures);
 }

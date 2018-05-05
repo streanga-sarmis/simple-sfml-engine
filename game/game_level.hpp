@@ -18,15 +18,19 @@
 #include <SFML/Graphics.hpp>
 
 #include "game_map.hpp"
+#include "game_textures.hpp"
+#include "game_entity_player.hpp"
+#include "game_entity_manager.hpp"
 
 class Level {
 private:
 	Map* map;
+	Player* player;
 
 public:
 	Level(Map* map);
 	~Level();
 	
 	void update(sf::RenderWindow* window);
-	void render(sf::RenderWindow* window);
+	void render(sf::RenderWindow* window, Textures& textures);
 };

@@ -15,18 +15,24 @@
 
 #pragma once
 
-#define TILE_SIZE 16
-
 #include <SFML/Graphics.hpp>
+#include <vector>
 
+#include "game_state.hpp"
 #include "game_utils.hpp"
+#include "game_screen.hpp"
+#include "game_button.hpp"
+#include "game_state_machine.hpp"
 
-class Textures {
+class PauseState : public State {
+private:
+	std::vector<Button> buttons;
+
 public:
-	sf::Texture TILES[15 + 2]; // 15 walls and 2 floors
+	PauseState();
+	~PauseState();
 
-	Textures();
-	~Textures();
-
-	void loadTexture(sf::Texture& texture, const char* path, const sf::IntRect& rect);
+	void checkMouseClicked(sf::RenderWindow* window, sf::Event& event) override;
+	void update(sf::RenderWindow* window) override;
+	void render(sf::RenderWindow* window) override;
 };

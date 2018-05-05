@@ -17,17 +17,31 @@
 
 Level::Level(Map* map):
 map(map){
-
+	player = new Player();
+	EntityManager::initializeEntityArray();
+	EntityManager::addEntity(player);
 }
 
 Level::~Level() {
-	delete map;
+	EntityManager::clearEntities();
 }
 
 void Level::update(sf::RenderWindow* window) {
-
+	EntityManager::update(window, *map);
 }
 
-void Level::render(sf::RenderWindow* window) {
-	map->render(window, 0, 0);
+void Level::render(sf::RenderWindow* window, Textures& textures) {
+	int xs = player->bounds.left - window->getSize().x / 2;
+	int ys = player->bounds.top - window->getSize().y / 2;
+
+	int x0 = xs / 45; // 45 because thats the offset for the tiles
+	int y0 = ys / 45;
+	int x1 = x0 + ((window->getSize().x + 47) / 45);
+	int y1 = y0 + ((window->getSize().y + 47) / 45);
+
+	Screen::offset(xs, ys);
+
+	map->render(window, textures, x0, y0, x1, y1);
+	EntityManager::render(window, textures, x0, y0, x1, y1);
+	map->renderOverlay(window, textures, x0, y0, x1, y1);
 }

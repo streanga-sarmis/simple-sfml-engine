@@ -27,8 +27,8 @@ void Screen::initializeFont() { // make a font class for fonts
 
 void Screen::renderSprite(sf::RenderWindow* window, sf::Texture& texture, int x, int y, int sx, int sy) {
 	sf::Sprite sprite;
-	int x1 = x + xOff;
-	int y1 = y + yOff;
+	int x1 = x - xOff;
+	int y1 = y - yOff;
 	sprite.setScale(sx, sy);
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f(x1, y1));
@@ -37,23 +37,25 @@ void Screen::renderSprite(sf::RenderWindow* window, sf::Texture& texture, int x,
 
 void Screen::renderRectangle(sf::RenderWindow* window, const sf::Color& color, int x, int y, int w, int h) {
 	sf::RectangleShape rectangle;
-	int x1 = x + xOff;
-	int y1 = y + yOff;
+	int x1 = x - xOff;
+	int y1 = y - yOff;
 	rectangle.setSize(sf::Vector2f(w, h));
 	rectangle.setFillColor(color);
 	rectangle.setPosition(x1, y1);
 	window->draw(rectangle);
 }
 
-void Screen::renderText(sf::RenderWindow* window, const sf::String& text, int x, int y, int size) {
+void Screen::renderText(sf::RenderWindow* window, const sf::String& text, int x, int y, int size, const sf::Color& color) {
 	sf::Text render(text, font);
-	render.setPosition(sf::Vector2f(x, y));
+	int x1 = x - xOff;
+	int y1 = y - yOff;
+	render.setPosition(sf::Vector2f(x1, y1));
 	render.setCharacterSize(size);
-	render.setFillColor(sf::Color::White);
+	render.setFillColor(color);
 	window->draw(render);
 }
 
 void Screen::offset(int xo, int yo) {
-	xOff -= xo;
-	yOff -= yo;
+	xOff = xo;
+	yOff = yo;
 }

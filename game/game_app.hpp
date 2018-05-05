@@ -24,7 +24,6 @@
 #include "game_state_machine.hpp"
 
 class App {
-
 public:
 	App();
 	~App();

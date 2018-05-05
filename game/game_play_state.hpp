@@ -24,11 +24,14 @@
 #include "game_level.hpp"
 #include "game_screen.hpp"
 #include "game_button.hpp"
+#include "game_textures.hpp"
+#include "game_pause_state.hpp"
 #include "game_state_machine.hpp"
 
 class PlayState : public State{
 private:
 	Level* level;
+	Textures textures;
 
 public:
 	PlayState(Map* map);

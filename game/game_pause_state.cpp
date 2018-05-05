@@ -13,53 +13,42 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#include "game_menu_state.hpp"
+#include "game_pause_state.hpp"
 
-void startGame(){
-	StateMachine::pushState(new MapLoaderState());
+void returnBack() {
+	StateMachine::popState();
 }
 
-void about() {
-
+void returnToMenu() {
+	// implement this
 }
 
-void exitGame(sf::RenderWindow* window) {
-	window->close();
-}
-
-MenuState::MenuState() {
+PauseState::PauseState() {
 	// add access to window width and height
-	buttons.emplace_back(Button("Start Game", 500, 400, 200, 50, &startGame));
-	buttons.emplace_back(Button("About", 500, 470, 200, 50, &about));
-	buttons.emplace_back(Button("Exit", 500, 540, 200, 50, &exitGame));
+	buttons.emplace_back(Button("Return", 500, 400, 200, 50, &returnBack));
+	buttons.emplace_back(Button("Go to main menu", 500, 540, 200, 50, &returnToMenu));
 }
 
-MenuState::~MenuState() {
+PauseState::~PauseState() {
 	buttons.clear();
 }
 
-void MenuState::checkMouseClicked(sf::RenderWindow* window, sf::Event& event) {
+void PauseState::checkMouseClicked(sf::RenderWindow* window, sf::Event& event) {
 	for (int i = 0; i < buttons.size(); ++i) {
-		if (buttons[i].checkBounds(event)){
-			if (i == buttons.size() - 1) {
-				buttons[i].exec(window);
-			} else {
-				buttons[i].exec();
-			}
+		if (buttons[i].checkBounds(event)) {
+			buttons[i].exec();
 			break;
 		}
 	}
 }
 
-void MenuState::update(sf::RenderWindow* window) {
+void PauseState::update(sf::RenderWindow* window) {
 
 }
 
-void MenuState::render(sf::RenderWindow* window) {
-	window->clear();
-
+void PauseState::render(sf::RenderWindow* window) {
 	for (int i = 0; i < buttons.size(); ++i) {
 		buttons[i].render(window);
 	}
-	Screen::renderText(window, "Game!", 500, 20, 256);
+	Screen::renderText(window, "PAUSE!", 500, 20, 256);
 }

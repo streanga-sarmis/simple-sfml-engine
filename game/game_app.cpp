@@ -15,6 +15,8 @@
 
 #include "game_app.hpp"
 
+#include <iostream> // remove
+
 App::App() {
 	StateMachine::pushState(new MenuState());
 }
@@ -55,8 +57,6 @@ void App::update(sf::RenderWindow* window, sf::Event& event) {
 }
 
 void App::render(sf::RenderWindow* window) {
-	window->clear();
-
 	if (StateMachine::getCurrentState() != nullptr) {
 		StateMachine::getCurrentState()->render(window);
 	}

@@ -15,18 +15,16 @@
 
 #pragma once
 
-#define TILE_SIZE 16
+#include "game_entity.hpp"
+#include "game_screen.hpp"
+#include "game_entity_manager.hpp"
 
-#include <SFML/Graphics.hpp>
-
-#include "game_utils.hpp"
-
-class Textures {
+class Player : public Entity {
 public:
-	sf::Texture TILES[15 + 2]; // 15 walls and 2 floors
+	Player();
+	~Player();
 
-	Textures();
-	~Textures();
-
-	void loadTexture(sf::Texture& texture, const char* path, const sf::IntRect& rect);
+	void touchedEntity(Entity* other) override;
+	void update(sf::RenderWindow* window, Map& map) override;
+	void render(sf::RenderWindow* window, Textures& textures) override;
 };

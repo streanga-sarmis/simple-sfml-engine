@@ -15,18 +15,26 @@
 
 #pragma once
 
-#define TILE_SIZE 16
+#define MAXIMUM_SIZE 65536 // 256 * 256
 
-#include <SFML/Graphics.hpp>
-
+#include "game_map.hpp"
 #include "game_utils.hpp"
+#include "game_entity.hpp"
+#include "game_textures.hpp"
 
-class Textures {
+class EntityManager {
 public:
-	sf::Texture TILES[15 + 2]; // 15 walls and 2 floors
+	static unsigned entityIndex;
+	static unsigned currentSize;
+	static unsigned removeFlag;
+	static Entity** entities;
 
-	Textures();
-	~Textures();
-
-	void loadTexture(sf::Texture& texture, const char* path, const sf::IntRect& rect);
+	static void initializeEntityArray();
+	static unsigned checkRemoved();
+	static void addEntity(Entity* e);
+	static void removeEntity(unsigned index);
+	static void checkCollisions();
+	static void clearEntities();
+	static void update(sf::RenderWindow* windowm, Map& map);
+	static void render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1);
 };

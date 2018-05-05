@@ -30,6 +30,7 @@ void StateMachine::pushState(State* state) {
 }
 
 void StateMachine::popState() {
+	delete states[states.size() - 1];
 	states.pop_back();
 }
 

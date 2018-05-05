@@ -21,32 +21,46 @@ Map::Map(){
 
 Map::Map(unsigned w, unsigned h):
 width(w), height(h) {
-	if (!texture[0].loadFromFile("res/textures/dirt.png")) {
-	}
-
-	if (!texture[1].loadFromFile("res/textures/water.png")) {
-	}
 
 	tiles = new Tile[width * height];
+	overlayTiles = new Tile[width * height];
+	collisionTiles = new Tile[width * height];
 	loaded = false;
 }
 
 Map::~Map() {
 	delete[] tiles;
+	delete[] overlayTiles;
+	delete[] collisionTiles;
 }
 
-void Map::generateTerrain() {
-	if (tiles != nullptr) {
-		for (int i = 0; i < width * height; ++i) {
-			if (i % 3 == 0) {
-				tiles[i].type = 1;
+void Map::mapRolesToTiles() {
+	CSVParser::Data gTiles = CSVParser::parseFileToData("res/maps/map_ground.csv");
+	CSVParser::Data oTiles = CSVParser::parseFileToData("res/maps/map_overlay.csv");
+	CSVParser::Data cTiles = CSVParser::parseFileToData("res/maps/map_collision.csv");
+	unsigned w = gTiles.width;
+	unsigned h = gTiles.height;
+
+	for (int y = 0; y < h; ++y) {
+		for (int x = 0; x < w; ++x) {
+			if (gTiles.values[x + y * w] != -1) {
+				tiles[x + y * w].type = gTiles.values[x + y * w];
 			}
-			else {
-				tiles[i].type = 0;
+			if (oTiles.values[x + y * w] != -1) {
+				overlayTiles[x + y * w].type = oTiles.values[x + y * w];
+			}
+			if (cTiles.values[x + y * w] != -1) {
+				collisionTiles[x + y * w].type = cTiles.values[x + y * w];
 			}
 		}
 	}
+	CSVParser::clearData(gTiles);
+	CSVParser::clearData(oTiles);
+	CSVParser::clearData(cTiles);
 	loaded = true;
+}
+
+void Map::generateTerrain() {
 }
 
 void Map::setTile(Tile tile, int position) {
@@ -58,15 +72,28 @@ Tile Map::getTile(Tile tile, int position) {
 	return tiles[position];
 }
 
-void Map::renderTile(sf::RenderWindow* window, unsigned char type, int x, int y) {
-	Screen::renderSprite(window, texture[type], x * 30, y * 30, 2, 2);
+void Map::renderTile(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y) {
+	Screen::renderSprite(window, textures.TILES[type], x * 45, y * 45, 3, 3);
 }
 
-void Map::render(sf::RenderWindow* window, int xOffset, int yOffset) {
-	// compute the culling
-	for (int y = 0; y < 100; ++y) {
-		for (int x = 0; x < 100; ++x) {
-			renderTile(window, tiles[x + y * width].type, x, y);
+void Map::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1) {
+	for (int y = y0; y <= y1; ++y) {
+		for (int x = x0; x <= x1; ++x) {
+			if (x < 0 || x >= width || y < 0 || y >= height) {
+				continue;
+			}
+			renderTile(window, textures, tiles[x + y * width].type, x, y);
+		}
+	}
+}
+
+void Map::renderOverlay(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1) {
+	for (int y = y0; y <= y1; ++y) {
+		for (int x = x0; x <= x1; ++x) {
+			if (x < 0 || x >= width || y < 0 || y >= height) {
+				continue;
+			}
+			renderTile(window, textures, overlayTiles[x + y * width].type, x, y);
 		}
 	}
 }

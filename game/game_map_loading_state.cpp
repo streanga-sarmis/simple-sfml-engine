@@ -16,7 +16,7 @@
 #include "game_map_loading_state.hpp"
 
 MapLoaderState::MapLoaderState() {
-	map = new Map(512, 512);
+	map = new Map(16, 16);
 	Log::log("Generatig terrain");
 	displayed = false;
 }
@@ -39,6 +39,7 @@ void MapLoaderState::render(sf::RenderWindow* window) {
 	if (!displayed) {
 		Screen::renderText(window, "Loading map...", 100, 100, 50);
 		displayed = !displayed;
-		map->generateTerrain();
+		//map->generateTerrain();
+		map->mapRolesToTiles();
 	}
 }
