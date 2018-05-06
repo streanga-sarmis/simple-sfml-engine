@@ -128,8 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="game_animation.cpp" />
     <ClCompile Include="game_app.cpp" />
+    <ClCompile Include="game_big_bullet.cpp" />
     <ClCompile Include="game_button.cpp" />
+    <ClCompile Include="game_camera.cpp" />
     <ClCompile Include="game_csv_parser.cpp" />
     <ClCompile Include="game_entity_manager.cpp" />
     <ClCompile Include="game_entity_player.cpp" />
@@ -140,14 +143,18 @@
     <ClCompile Include="game_menu_state.cpp" />
     <ClCompile Include="game_pause_state.cpp" />
     <ClCompile Include="game_play_state.cpp" />
+    <ClCompile Include="game_projectile.cpp" />
     <ClCompile Include="game_screen.cpp" />
     <ClCompile Include="game_state_machine.cpp" />
     <ClCompile Include="game_textures.cpp" />
     <ClCompile Include="game_window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="game_animation.hpp" />
     <ClInclude Include="game_app.hpp" />
+    <ClInclude Include="game_big_bullet.hpp" />
     <ClInclude Include="game_button.hpp" />
+    <ClInclude Include="game_camera.hpp" />
     <ClInclude Include="game_csv_parser.hpp" />
     <ClInclude Include="game_entity.hpp" />
     <ClInclude Include="game_entity_manager.hpp" />
@@ -158,6 +165,7 @@
     <ClInclude Include="game_menu_state.hpp" />
     <ClInclude Include="game_pause_state.hpp" />
     <ClInclude Include="game_play_state.hpp" />
+    <ClInclude Include="game_projectile.hpp" />
     <ClInclude Include="game_screen.hpp" />
     <ClInclude Include="game_state.hpp" />
     <ClInclude Include="game_state_machine.hpp" />

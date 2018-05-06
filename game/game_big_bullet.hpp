@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -15,23 +13,15 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "game_projectile.hpp"
+#include "game_entity_manager.hpp" // remove
 
-#include "game_map.hpp"
-#include "game_camera.hpp"
-#include "game_textures.hpp"
-#include "game_entity_player.hpp"
-#include "game_entity_manager.hpp"
-
-class Level {
-private:
-	Map* map;
-	Player* player;
-
+class BigBullet : public Projectile {
 public:
-	Level(Map* map);
-	~Level();
-	
-	void update(sf::RenderWindow* window);
-	void render(sf::RenderWindow* window, Textures& textures);
+	BigBullet(Entity* owner, int x, int y, float angle);
+	~BigBullet();
+
+	void touchedEntity(Entity* other) override;
+	void update(sf::RenderWindow* window, Map& map) override; // remove
+	void render(sf::RenderWindow* window, Textures& textures) override;
 };

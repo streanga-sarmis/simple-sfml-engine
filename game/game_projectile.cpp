@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -13,25 +11,16 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include "game_projectile.hpp"
 
-#include <SFML/Graphics.hpp>
+Projectile::Projectile(Entity* owner, int x, int y, float angle):
+owner(owner), angle(angle){
+	bounds.left = x;
+	bounds.top = y;
+	bounds.width = 48; // 16 scaled 3 times
+	bounds.height = 48;
+}
 
-#include "game_map.hpp"
-#include "game_camera.hpp"
-#include "game_textures.hpp"
-#include "game_entity_player.hpp"
-#include "game_entity_manager.hpp"
+Projectile::~Projectile() {
 
-class Level {
-private:
-	Map* map;
-	Player* player;
-
-public:
-	Level(Map* map);
-	~Level();
-	
-	void update(sf::RenderWindow* window);
-	void render(sf::RenderWindow* window, Textures& textures);
-};
+}

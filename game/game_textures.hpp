@@ -23,10 +23,17 @@
 
 class Textures {
 public:
+	sf::Texture GUN;
+	sf::Texture CURSOR;
+	sf::Texture SHADOW;
+	sf::Texture BIG_BULLET;
+	sf::Texture PLAYER_IDLE[4];
+	sf::Texture PLAYER_WALK[7];
 	sf::Texture TILES[15 + 2]; // 15 walls and 2 floors
 
 	Textures();
 	~Textures();
 
+	void loadTexture(sf::Texture& texture, const char* path);
 	void loadTexture(sf::Texture& texture, const char* path, const sf::IntRect& rect);
 };

@@ -31,17 +31,11 @@ void Level::update(sf::RenderWindow* window) {
 }
 
 void Level::render(sf::RenderWindow* window, Textures& textures) {
-	int xs = player->bounds.left - window->getSize().x / 2;
-	int ys = player->bounds.top - window->getSize().y / 2;
+	Camera::computeScreenBounds(player->bounds.left, player->bounds.top, window->getSize().x, window->getSize().y);
 
-	int x0 = xs / 45; // 45 because thats the offset for the tiles
-	int y0 = ys / 45;
-	int x1 = x0 + ((window->getSize().x + 47) / 45);
-	int y1 = y0 + ((window->getSize().y + 47) / 45);
+	map->render(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
 
-	Screen::offset(xs, ys);
+	EntityManager::render(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
 
-	map->render(window, textures, x0, y0, x1, y1);
-	EntityManager::render(window, textures, x0, y0, x1, y1);
-	map->renderOverlay(window, textures, x0, y0, x1, y1);
+	map->renderOverlay(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
 }

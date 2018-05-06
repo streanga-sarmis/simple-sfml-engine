@@ -32,6 +32,7 @@ class PlayState : public State{
 private:
 	Level* level;
 	Textures textures;
+	sf::Sprite cursor;
 
 public:
 	PlayState(Map* map);

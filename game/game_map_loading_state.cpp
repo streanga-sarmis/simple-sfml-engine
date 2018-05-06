@@ -31,6 +31,7 @@ void MapLoaderState::checkMouseClicked(sf::RenderWindow* window, sf::Event& even
 
 void MapLoaderState::update(sf::RenderWindow* window) {
 	if (map->loaded) {
+		window->setMouseCursorVisible(false);
 		StateMachine::pushState(new PlayState(map));
 	}
 }

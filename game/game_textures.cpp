@@ -17,9 +17,28 @@
 
 Textures::Textures() { // add another way to initialize, from a text file or smth
 
+
+	loadTexture(GUN, "res/textures/gun.png");
+	loadTexture(CURSOR, "res/textures/cursor.png");
+	loadTexture(SHADOW, "res/textures/shadow_1.png");
+	loadTexture(BIG_BULLET, "res/textures/tileset.png", sf::IntRect(16* 0, 16 * 15, TILE_SIZE, TILE_SIZE));
+	
+	loadTexture(PLAYER_IDLE[0], "res/textures/dino.png", sf::IntRect(24 * 0, 24 * 1, 24, 24));
+	loadTexture(PLAYER_IDLE[1], "res/textures/dino.png", sf::IntRect(24 * 1, 24 * 1, 24, 24));
+	loadTexture(PLAYER_IDLE[2], "res/textures/dino.png", sf::IntRect(24 * 2, 24 * 1, 24, 24));
+	loadTexture(PLAYER_IDLE[3], "res/textures/dino.png", sf::IntRect(24 * 1, 24 * 1, 24, 24));
+
+	loadTexture(PLAYER_WALK[0], "res/textures/dino.png", sf::IntRect(24 * 0, 24 * 1, 24, 24));
+	loadTexture(PLAYER_WALK[1], "res/textures/dino.png", sf::IntRect(24 * 4, 24 * 1, 24, 24));
+	loadTexture(PLAYER_WALK[2], "res/textures/dino.png", sf::IntRect(24 * 5, 24 * 1, 24, 24));
+	loadTexture(PLAYER_WALK[3], "res/textures/dino.png", sf::IntRect(24 * 6, 24 * 1, 24, 24));
+	loadTexture(PLAYER_WALK[4], "res/textures/dino.png", sf::IntRect(24 * 7, 24 * 1, 24, 24));
+	loadTexture(PLAYER_WALK[5], "res/textures/dino.png", sf::IntRect(24 * 8, 24 * 1, 24, 24));
+	loadTexture(PLAYER_WALK[6], "res/textures/dino.png", sf::IntRect(24 * 9, 24 * 1, 24, 24));
+
 	// first row
 	loadTexture(TILES[0], "res/textures/basic_walls.png", sf::IntRect(16 * 0, 16 * 0, TILE_SIZE, TILE_SIZE));
-	loadTexture(TILES[1], "res/textures/basic_walls.png", sf::IntRect(16 * 1, 16 * 0, 15, 15));
+	loadTexture(TILES[1], "res/textures/basic_walls.png", sf::IntRect(16 * 1, 16 * 0, TILE_SIZE, TILE_SIZE));
 	loadTexture(TILES[2], "res/textures/basic_walls.png", sf::IntRect(16 * 2, 16 * 0, TILE_SIZE, TILE_SIZE));
 	loadTexture(TILES[3], "res/textures/basic_walls.png", sf::IntRect(16 * 3, 16 * 0, TILE_SIZE, TILE_SIZE));
 	loadTexture(TILES[4], "res/textures/basic_walls.png", sf::IntRect(16 * 4, 16 * 0, TILE_SIZE, TILE_SIZE));
@@ -27,7 +46,7 @@ Textures::Textures() { // add another way to initialize, from a text file or smt
 	// second row
 	loadTexture(TILES[5], "res/textures/basic_walls.png", sf::IntRect(16 * 0, 16 * 1, TILE_SIZE, TILE_SIZE));
 	loadTexture(TILES[6], "res/textures/basic_walls.png", sf::IntRect(16 * 1, 16 * 1, TILE_SIZE, TILE_SIZE));
-	loadTexture(TILES[7], "res/textures/basic_walls.png", sf::IntRect(16 * 2, 16 * 1, 15, 15));
+	loadTexture(TILES[7], "res/textures/basic_walls.png", sf::IntRect(16 * 2, 16 * 1, TILE_SIZE, TILE_SIZE));
 	loadTexture(TILES[8], "res/textures/basic_walls.png", sf::IntRect(16 * 3, 16 * 1, TILE_SIZE, TILE_SIZE));
 	loadTexture(TILES[9], "res/textures/basic_walls.png", sf::IntRect(16 * 4, 16 * 1, TILE_SIZE, TILE_SIZE));
 
@@ -41,6 +60,12 @@ Textures::Textures() { // add another way to initialize, from a text file or smt
 
 Textures::~Textures() {
 
+}
+
+void Textures::loadTexture(sf::Texture& texture, const char* path) {
+	if (!texture.loadFromFile(path)) {
+		Log::log("Could not load the texture!", "[ERROR]");
+	}
 }
 
 void Textures::loadTexture(sf::Texture& texture, const char* path, const sf::IntRect& rect) {

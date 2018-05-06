@@ -81,10 +81,10 @@ void EntityManager::update(sf::RenderWindow* window, Map& map) {
 void EntityManager::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1) {
 	for (int i = 0; i < currentSize; ++i) {
 		if (entities[i] != nullptr) {
-			int ex0 = entities[i]->bounds.left / 45;
-			int ey0 = entities[i]->bounds.top / 45;
-			int ex1 = (entities[i]->bounds.left + entities[i]->bounds.width) / 45;
-			int ey1 = (entities[i]->bounds.top + entities[i]->bounds.height) / 45;
+			int ex0 = (int)entities[i]->bounds.left >> 6;
+			int ey0 = (int)entities[i]->bounds.top >> 6;
+			int ex1 = (int)(entities[i]->bounds.left + entities[i]->bounds.width) >> 6;
+			int ey1 = (int)(entities[i]->bounds.top + entities[i]->bounds.height) >> 6;
 
 			if (ex0 < x1 && ex1 > x0 && ey0 < y1 && ey1 > y0) {
 				entities[i]->render(window, textures);

@@ -17,6 +17,8 @@
 
 PlayState::PlayState(Map* map):
 level(new Level(map)){
+	cursor.setTexture(textures.CURSOR);
+	cursor.setScale(0.75, 0.75);
 }
 
 PlayState::~PlayState() {
@@ -31,11 +33,15 @@ void PlayState::update(sf::RenderWindow* window) {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
 		StateMachine::pushState(new PauseState());
 	}
+	Camera::update();
 	level->update(window);
 }
 
 void PlayState::render(sf::RenderWindow* window) {
 	window->clear(sf::Color::Black);
+	
+	cursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(*window));
 
 	level->render(window, textures);
+	window->draw(cursor);
 }

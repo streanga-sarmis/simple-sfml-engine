@@ -25,13 +25,48 @@ void Screen::initializeFont() { // make a font class for fonts
 	}
 }
 
-void Screen::renderSprite(sf::RenderWindow* window, sf::Texture& texture, int x, int y, int sx, int sy) {
+void Screen::renderSpriteOrig(sf::RenderWindow* window, sf::Texture& texture, float x, float y, int sx, int sy, int width, int height, bool mx, bool my, float rotate) {
 	sf::Sprite sprite;
 	int x1 = x - xOff;
 	int y1 = y - yOff;
-	sprite.setScale(sx, sy);
+	int scalex = sx;
+	int scaley = sy;
+
+	if (mx) {
+		scalex *= -1;
+	}
+
+	if (my) {
+		scaley *= -1;
+	}
+
+	sprite.setTexture(texture);
+	sprite.setOrigin(sf::Vector2f(width / 2, height / 2));
+	sprite.setPosition(sf::Vector2f(x1, y1));
+	sprite.setRotation(rotate);
+	sprite.setScale(scalex, scaley);
+	window->draw(sprite);
+}
+
+void Screen::renderSprite(sf::RenderWindow* window, sf::Texture& texture, float x, float y, int sx, int sy, bool mx, bool my, float rotate) {
+	sf::Sprite sprite;
+	float x1 = x - xOff;
+	float y1 = y - yOff;
+	int scalex = sx;
+	int scaley = sy;
+
+	if (mx) {
+		scalex *= -1;
+	}
+
+	if (my) {
+		scaley *= -1;
+	}
+
+	sprite.setScale(scalex, scaley);
 	sprite.setTexture(texture);
 	sprite.setPosition(sf::Vector2f(x1, y1));
+	sprite.setRotation(rotate);
 	window->draw(sprite);
 }
 

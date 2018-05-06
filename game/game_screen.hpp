@@ -22,14 +22,16 @@
 class Screen {
 
 private:
-	static int xOff;
-	static int yOff;
 	static sf::Font font;
 
 public:
-	void static initializeFont();
-	void static offset(int xo, int yo);
-	void static renderSprite(sf::RenderWindow* window, sf::Texture& texture, int x, int y, int sx, int sy);
-	void static renderRectangle(sf::RenderWindow* window, const sf::Color& color, int x, int y, int w, int h);
-	void static renderText(sf::RenderWindow* window, const sf::String& text, int x, int y, int size, const sf::Color& color = sf::Color::White);
+	static int xOff;
+	static int yOff;
+
+	static void initializeFont();
+	static void offset(int xo, int yo);
+	static void renderSprite(sf::RenderWindow* window, sf::Texture& texture, float x, float y, int sx, int sy, bool mx = false, bool my = false, float rotate = 0);
+	static void renderSpriteOrig(sf::RenderWindow* window, sf::Texture& texture, float x, float y, int sx, int sy, int width, int height, bool mx = false, bool my = false, float rotate = 0);
+	static void renderRectangle(sf::RenderWindow* window, const sf::Color& color, int x, int y, int w, int h);
+	static void renderText(sf::RenderWindow* window, const sf::String& text, int x, int y, int size, const sf::Color& color = sf::Color::White);
 };

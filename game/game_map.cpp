@@ -43,15 +43,9 @@ void Map::mapRolesToTiles() {
 
 	for (int y = 0; y < h; ++y) {
 		for (int x = 0; x < w; ++x) {
-			if (gTiles.values[x + y * w] != -1) {
-				tiles[x + y * w].type = gTiles.values[x + y * w];
-			}
-			if (oTiles.values[x + y * w] != -1) {
-				overlayTiles[x + y * w].type = oTiles.values[x + y * w];
-			}
-			if (cTiles.values[x + y * w] != -1) {
-				collisionTiles[x + y * w].type = cTiles.values[x + y * w];
-			}
+			tiles[x + y * w].type = gTiles.values[x + y * w];
+			overlayTiles[x + y * w].type = oTiles.values[x + y * w];
+			collisionTiles[x + y * w].type = cTiles.values[x + y * w];
 		}
 	}
 	CSVParser::clearData(gTiles);
@@ -73,7 +67,7 @@ Tile Map::getTile(Tile tile, int position) {
 }
 
 void Map::renderTile(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y) {
-	Screen::renderSprite(window, textures.TILES[type], x * 45, y * 45, 3, 3);
+	Screen::renderSprite(window, textures.TILES[type], x * 64, y * 64, 4, 4);
 }
 
 void Map::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1) {
@@ -82,7 +76,9 @@ void Map::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, i
 			if (x < 0 || x >= width || y < 0 || y >= height) {
 				continue;
 			}
-			renderTile(window, textures, tiles[x + y * width].type, x, y);
+			if (tiles[x + y * width].type != -1) {
+				renderTile(window, textures, tiles[x + y * width].type, x, y);
+			}
 		}
 	}
 }
@@ -93,7 +89,9 @@ void Map::renderOverlay(sf::RenderWindow* window, Textures& textures, int x0, in
 			if (x < 0 || x >= width || y < 0 || y >= height) {
 				continue;
 			}
-			renderTile(window, textures, overlayTiles[x + y * width].type, x, y);
+			if (overlayTiles[x + y * width].type != -1) {
+				renderTile(window, textures, overlayTiles[x + y * width].type, x, y);
+			}
 		}
 	}
 }

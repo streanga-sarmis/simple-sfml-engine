@@ -18,6 +18,6 @@
 #include <SFML/Graphics.hpp>
 
 struct Tile {
-	unsigned char type;
+	char type;
 	bool solid;// almost useless to have now...
 };

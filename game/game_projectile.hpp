@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -15,23 +13,16 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "game_entity.hpp"
 
-#include "game_map.hpp"
-#include "game_camera.hpp"
-#include "game_textures.hpp"
-#include "game_entity_player.hpp"
-#include "game_entity_manager.hpp"
-
-class Level {
-private:
-	Map* map;
-	Player* player;
+class Projectile : public Entity{
+protected:
+	Entity* owner;
+	int damage;
+	int speed;
+	float angle;
 
 public:
-	Level(Map* map);
-	~Level();
-	
-	void update(sf::RenderWindow* window);
-	void render(sf::RenderWindow* window, Textures& textures);
+	Projectile(Entity* owner, int x, int y, float angle);
+	~Projectile();
 };

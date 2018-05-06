@@ -17,9 +17,18 @@
 
 #include "game_entity.hpp"
 #include "game_screen.hpp"
+#include "game_camera.hpp"
+#include "game_big_bullet.hpp"// remove
+#include "game_animation.hpp"
 #include "game_entity_manager.hpp"
 
 class Player : public Entity {
+private:
+	Animation IDLE;
+	Animation WALK;
+	bool mirrorX;
+	bool walking;
+
 public:
 	Player();
 	~Player();

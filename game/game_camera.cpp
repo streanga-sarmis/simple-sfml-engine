@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -13,25 +11,31 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
-
-#include <SFML/Graphics.hpp>
-
-#include "game_map.hpp"
 #include "game_camera.hpp"
-#include "game_textures.hpp"
-#include "game_entity_player.hpp"
-#include "game_entity_manager.hpp"
 
-class Level {
-private:
-	Map* map;
-	Player* player;
+int Camera::xs = 0;
+int Camera::ys = 0;
+int Camera::x0 = 0;
+int Camera::y0 = 0;
+int Camera::x1 = 0;
+int Camera::y1 = 0;
 
-public:
-	Level(Map* map);
-	~Level();
-	
-	void update(sf::RenderWindow* window);
-	void render(sf::RenderWindow* window, Textures& textures);
-};
+void Camera::computeScreenBounds(int xc, int yc, unsigned wx, unsigned wy) {
+	xs = xc - wx / 2;
+	ys = yc - wy / 2;
+
+	x0 = xs >> 6;
+	y0 = ys >> 6;
+	x1 = x0 + ((wx + 64) >> 6);
+	y1 = y0 + ((wy + 64) >> 6);
+}
+
+void Camera::update() {
+	Screen::offset(xs, ys);
+}
+
+void Camera::shake() {
+	xs += std::rand() % 5;
+	ys += std::rand() % 5;
+	Screen::offset(xs, ys);
+}

@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -15,23 +13,18 @@
 
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "game_screen.hpp"
 
-#include "game_map.hpp"
-#include "game_camera.hpp"
-#include "game_textures.hpp"
-#include "game_entity_player.hpp"
-#include "game_entity_manager.hpp"
-
-class Level {
-private:
-	Map* map;
-	Player* player;
-
+class Camera {
 public:
-	Level(Map* map);
-	~Level();
-	
-	void update(sf::RenderWindow* window);
-	void render(sf::RenderWindow* window, Textures& textures);
+	static int xs;
+	static int ys;
+	static int x0;
+	static int y0;
+	static int x1;
+	static int y1;
+
+	static void computeScreenBounds(int xc, int yc, unsigned wx, unsigned wy);
+	static void update();
+	static void shake();
 };

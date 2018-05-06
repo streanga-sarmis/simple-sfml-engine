@@ -63,6 +63,18 @@
     <ClCompile Include="game_csv_parser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game_animation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_projectile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_big_bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game_window.hpp">
@@ -120,6 +132,18 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="game_csv_parser.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_animation.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_camera.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_projectile.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_big_bullet.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

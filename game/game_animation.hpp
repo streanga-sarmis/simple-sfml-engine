@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -17,21 +15,20 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "game_map.hpp"
-#include "game_camera.hpp"
-#include "game_textures.hpp"
-#include "game_entity_player.hpp"
-#include "game_entity_manager.hpp"
+#include "game_screen.hpp"
 
-class Level {
+class Animation {
+
 private:
-	Map* map;
-	Player* player;
+	unsigned time;
+	unsigned frames;
+	unsigned interval;
 
 public:
-	Level(Map* map);
-	~Level();
-	
-	void update(sf::RenderWindow* window);
-	void render(sf::RenderWindow* window, Textures& textures);
+	Animation();
+	~Animation();
+
+	void initializeAnimation(unsigned frames, unsigned interval);
+	void step();
+	void render(sf::RenderWindow* window, sf::Texture* textures, int x, int y, int xs, int ys, bool mx = false, bool my = false);
 };

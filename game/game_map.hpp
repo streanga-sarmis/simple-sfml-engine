@@ -24,13 +24,13 @@
 
 class Map {
 private:
-	unsigned width;
-	unsigned height;
 	Tile* tiles;
 	Tile* overlayTiles;
-	Tile* collisionTiles;
 
 public:
+	Tile* collisionTiles;
+	unsigned width;
+	unsigned height;
 	bool loaded;
 
 	Map();
