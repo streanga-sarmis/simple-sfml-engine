@@ -30,7 +30,6 @@ void BigBullet::touchedEntity(Entity* other) {
 void BigBullet::update(sf::RenderWindow* window, Map& map) {
 	// put the update method in the projectile not here
 	if (!canStep(velocity.x, velocity.y, map)) {
-		std::cout << "hit ?\n";
 		EntityManager::removeEntity(index);
 	}
 
