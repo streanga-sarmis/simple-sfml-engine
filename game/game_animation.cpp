@@ -31,6 +31,6 @@ void Animation::step() {
 	++time;
 }
 
-void Animation::render(sf::RenderWindow* window, sf::Texture* texture, int x, int y, int xs, int ys, bool mx, bool my) {
-	Screen::renderSprite(window, texture[(time / interval) % frames], x, y, xs, ys, mx, my);
+void Animation::render(sf::RenderWindow* window, sf::Texture* texture, int x, int y, float z, int xs, int ys, bool mx, bool my, const sf::Color& color) {
+	Screen::renderSprite(window, texture[(time / interval) % frames], x, y, z, xs, ys, mx, my, 0, color);
 }

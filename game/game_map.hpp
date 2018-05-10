@@ -20,6 +20,7 @@
 #include "game_tile.hpp"
 #include "game_screen.hpp"
 #include "game_textures.hpp"
+#include "game_noise_map.hpp"
 #include "game_csv_parser.hpp"
 
 class Map {
@@ -34,7 +35,6 @@ public:
 	bool loaded;
 
 	Map();
-	Map(unsigned w, unsigned h);
 	~Map();
 
 	void generateTerrain();
@@ -42,6 +42,7 @@ public:
 	Tile getTile(Tile tile, int position);
 	void mapRolesToTiles();
 	void renderTile(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y);
+	void renderTileNoSort(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y);
 	void renderOverlay(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1);
 	void render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1);
 };

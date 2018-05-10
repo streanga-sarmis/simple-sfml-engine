@@ -17,9 +17,13 @@
 
 #include <iostream>
 
-class Log {
+class Util {
 public:
 	inline static void log(const char* msg, const char* TAG = "[INFO]") {
 		std::cout << TAG << " " << msg << "\n";
+	}
+	template <class before, class after>
+	inline static bool isType(const before* src) {
+		return dynamic_cast<const after*>(src) != nullptr;
 	}
 };

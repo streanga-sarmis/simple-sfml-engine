@@ -15,80 +15,117 @@
 
 #include "game_entity_manager.hpp"
 
-Entity** EntityManager::entities;
-unsigned EntityManager::entityIndex;
-unsigned EntityManager::currentSize;
-unsigned EntityManager::removeFlag;
-
-void EntityManager::initializeEntityArray() {
-	entities = new Entity*[MAXIMUM_SIZE](); // 256 * 256 is the maximum amount of possible entities
-	entityIndex = 0;
-	currentSize = 0;
-	removeFlag = 0;
-}
+//Entity** EntityManager::entities;
+std::list<Entity*> EntityManager::entities;
+std::list<Entity*>* EntityManager::entitiesInTiles;
 
 void EntityManager::addEntity(Entity* e) {
-	if (currentSize < MAXIMUM_SIZE - 1) {
-		entities[entityIndex] = e;
-		e->index = entityIndex;
-		++currentSize;
-		if (removeFlag) {
-			entityIndex = checkRemoved();
-		} else {
-			++entityIndex;
+	entities.emplace_front(e);
+}
+
+void EntityManager::removeEntity(Entity* e) {
+	e->removed = true;
+}
+
+void EntityManager::checkCollisions(Entity* th, Map& map) {
+	int x = (int)(th->position.x) >> 6;
+	int y = (int)(th->position.y) >> 6;
+	if (x >= 0 && x < map.width && y >= 0 && y < map.height) {
+		for (std::list<Entity*>::iterator it = entitiesInTiles[x + y * map.width].begin();
+			it != entitiesInTiles[x + y * map.width].end();) {
+			// remember to make collision bounds
+			if ((*it) != th) {
+				if (th->entityCollider.intersects((*it)->entityCollider)) {
+					th->touchedEntity(*it++);
+				}
+				else {
+					*it++;
+				}
+			}
+			else {
+				*it++;
+			}
 		}
-	} else {
-		Log::log("Maximum amount of entities was exceeded!", "[ERROR]");
 	}
-}
-
-unsigned EntityManager::checkRemoved() {
-	for (unsigned i = 0; i < currentSize; ++i) {
-		if (entities[i] == nullptr) {
-			--removeFlag;
-			return i;
-		}
-	}
-}
-
-void EntityManager::removeEntity(unsigned index) {
-	delete entities[index];
-	entities[index] = nullptr;
-	++removeFlag;
-	--currentSize;
-}
-
-void EntityManager::checkCollisions() {
-
 }
 
 void EntityManager::clearEntities() {
-	for (int i = 0; i < currentSize; ++i){
-		delete entities[i];
+	for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end();){
+		delete *it++;
 	}
 
-	delete[] entities;
+	entities.clear();
+
+	delete[] entitiesInTiles;
+}
+
+void EntityManager::initializeEntityMapping(Map& map) {
+	entitiesInTiles = new std::list<Entity*>[map.width * map.height];
 }
 
 void EntityManager::update(sf::RenderWindow* window, Map& map) {
-	for (int i = 0; i < currentSize; ++i) {
-		if (entities[i] != nullptr) {
-			entities[i]->update(window, map);
+	for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end();) {
+		if (*it != nullptr) {
+			float x0 = (*it)->position.x;
+			float y0 = (*it)->position.y;
+			(*it)->update(window, map);
+			if ((*it)->removed) {
+				int ox = (int)(x0) >> 6;
+				int oy = (int)(y0) >> 6;
+				if ((*it)->canCollide) {
+					entitiesInTiles[ox + oy * map.width].remove((*it));
+				}
+				entities.remove(*it++);
+				continue;
+			}
+			if ((*it)->canCollide) {
+
+				float x1 = (*it)->position.x;
+				float y1 = (*it)->position.y;
+				if (x0 != x1 || y0 != y1) {
+					int ox = (int)(x0) >> 6;
+					int oy = (int)(y0) >> 6;
+					int x = (int)(x1) >> 6;
+					int y = (int)(y1) >> 6;
+
+					if (x < 0 || x >= map.width || y < 0 || y >= map.height) {
+						*it++;
+						continue;
+					}
+
+					if (ox < 0 || ox >= map.width || oy < 0 || oy >= map.height) {
+						*it++;
+						continue;
+					}
+
+					entitiesInTiles[ox + oy * map.width].remove((*it)); // implement a better data structure here
+					entitiesInTiles[x + y * map.width].emplace_back((*it));
+				}
+			}
+			*it++;
+		} else {
+			*it++;
 		}
 	}
 }
 
 void EntityManager::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1) {
-	for (int i = 0; i < currentSize; ++i) {
-		if (entities[i] != nullptr) {
-			int ex0 = (int)entities[i]->bounds.left >> 6;
-			int ey0 = (int)entities[i]->bounds.top >> 6;
-			int ex1 = (int)(entities[i]->bounds.left + entities[i]->bounds.width) >> 6;
-			int ey1 = (int)(entities[i]->bounds.top + entities[i]->bounds.height) >> 6;
+	for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end();) {
+		if (*it != nullptr) {
+			int ex0 = (int)((*it)->tileCollider.left) >> 6;
+			int ey0 = (int)((*it)->tileCollider.top) >> 6;
+			int ex1 = (int)((*it)->tileCollider.left + (*it)->tileCollider.width) >> 6;
+			int ey1 = (int)((*it)->tileCollider.top + (*it)->tileCollider.height) >> 6;
 
 			if (ex0 < x1 && ex1 > x0 && ey0 < y1 && ey1 > y0) {
-				entities[i]->render(window, textures);
+				(*it++)->render(window, textures);
 			}
+			else {
+				*it++;
+			}
+		} else {
+			*it++;
 		}
+
 	}
 }

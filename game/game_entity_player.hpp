@@ -15,25 +15,34 @@
 
 #pragma once
 
-#include "game_entity.hpp"
+#include "game_item.hpp"
+#include "game_stats.hpp"
 #include "game_screen.hpp"
 #include "game_camera.hpp"
-#include "game_big_bullet.hpp"// remove
 #include "game_animation.hpp"
+#include "game_entity_fairy.hpp"
+#include "game_item_manager.hpp"
 #include "game_entity_manager.hpp"
+#include "game_wearing_entity.hpp"
 
-class Player : public Entity {
+class Player : public WearingEntity {
 private:
+	Fairy* fairy;
 	Animation IDLE;
 	Animation WALK;
 	bool mirrorX;
 	bool walking;
+	float gunAngle;
+	int pickupInterval;
 
 public:
+	
 	Player();
 	~Player();
 
+	void touchedItem(Item* item) override;
 	void touchedEntity(Entity* other) override;
 	void update(sf::RenderWindow* window, Map& map) override;
 	void render(sf::RenderWindow* window, Textures& textures) override;
+	void died() override;
 };

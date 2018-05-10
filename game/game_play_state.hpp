@@ -18,6 +18,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#include "game_hud.hpp"
 #include "game_map.hpp"
 #include "game_state.hpp"
 #include "game_utils.hpp"

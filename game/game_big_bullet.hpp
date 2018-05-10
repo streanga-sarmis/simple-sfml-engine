@@ -13,12 +13,14 @@
 
 #pragma once
 
+#include "game_mob.hpp"
 #include "game_projectile.hpp"
 #include "game_entity_manager.hpp" // remove
+#include "game_particle.hpp" // remove
 
 class BigBullet : public Projectile {
 public:
-	BigBullet(Entity* owner, int x, int y, float angle);
+	BigBullet(Gun* owner, int x, int y, float angle);
 	~BigBullet();
 
 	void touchedEntity(Entity* other) override;

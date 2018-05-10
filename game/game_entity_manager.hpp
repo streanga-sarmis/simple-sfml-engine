@@ -17,6 +17,8 @@
 
 #define MAXIMUM_SIZE 65536 // 256 * 256
 
+#include <list>
+
 #include "game_map.hpp"
 #include "game_utils.hpp"
 #include "game_entity.hpp"
@@ -24,17 +26,14 @@
 
 class EntityManager {
 public:
-	static unsigned entityIndex;
-	static unsigned currentSize;
-	static unsigned removeFlag;
-	static Entity** entities;
+	static std::list<Entity*> entities;
+	static std::list<Entity*>* entitiesInTiles;
 
-	static void initializeEntityArray();
-	static unsigned checkRemoved();
 	static void addEntity(Entity* e);
-	static void removeEntity(unsigned index);
-	static void checkCollisions();
+	static void removeEntity(Entity* e);
+	static void checkCollisions(Entity* th, Map& map);
 	static void clearEntities();
+	static void initializeEntityMapping(Map& map);
 	static void update(sf::RenderWindow* windowm, Map& map);
 	static void render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1);
 };

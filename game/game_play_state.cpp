@@ -19,6 +19,7 @@ PlayState::PlayState(Map* map):
 level(new Level(map)){
 	cursor.setTexture(textures.CURSOR);
 	cursor.setScale(0.75, 0.75);
+	HUD::initializeAnimations();
 }
 
 PlayState::~PlayState() {
@@ -35,6 +36,7 @@ void PlayState::update(sf::RenderWindow* window) {
 	}
 	Camera::update();
 	level->update(window);
+	HUD::update();
 }
 
 void PlayState::render(sf::RenderWindow* window) {
@@ -43,5 +45,9 @@ void PlayState::render(sf::RenderWindow* window) {
 	cursor.setPosition((sf::Vector2f)sf::Mouse::getPosition(*window));
 
 	level->render(window, textures);
+
+	HUD::render(window, textures);
+
+	Screen::sortAndRender(window);
 	window->draw(cursor);
 }

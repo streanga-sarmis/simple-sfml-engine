@@ -15,6 +15,7 @@
 
 #pragma once
 
+#include <list>
 #include <SFML/Graphics.hpp>
 
 #include "game_utils.hpp"
@@ -22,7 +23,13 @@
 class Screen {
 
 private:
+	static struct sprite {
+		sf::Sprite sprt;
+		float z;
+	};
+
 	static sf::Font font;
+	static std::list<sprite> sprites;
 
 public:
 	static int xOff;
@@ -30,8 +37,14 @@ public:
 
 	static void initializeFont();
 	static void offset(int xo, int yo);
-	static void renderSprite(sf::RenderWindow* window, sf::Texture& texture, float x, float y, int sx, int sy, bool mx = false, bool my = false, float rotate = 0);
-	static void renderSpriteOrig(sf::RenderWindow* window, sf::Texture& texture, float x, float y, int sx, int sy, int width, int height, bool mx = false, bool my = false, float rotate = 0);
-	static void renderRectangle(sf::RenderWindow* window, const sf::Color& color, int x, int y, int w, int h);
+	static void renderSprite(sf::RenderWindow* window, sf::Texture& texture, float x, float y, float z, int sx, int sy, bool mx = false, bool my = false,
+		float rotate = 0, const sf::Color& color = sf::Color::White);
+	static void renderSpriteOrig(sf::RenderWindow* window, sf::Texture& texture, float x, float y, float z, int sx, int sy, int width, int height, bool mx = false, bool my = false,
+		float rotate = 0, const sf::Color& color = sf::Color::White);
+	static void renderRectangle(sf::RenderWindow* window, const sf::Color& color, float x, float y, int w, int h);
 	static void renderText(sf::RenderWindow* window, const sf::String& text, int x, int y, int size, const sf::Color& color = sf::Color::White);
+	static void sortAndRender(sf::RenderWindow* window);
+	static bool depthCompare(const sprite& first, const sprite& second);
+	static void renderSpriteNoSort(sf::RenderWindow* window, sf::Texture& texture, float x, float y, int sx, int sy, bool mx = false, bool my = false,
+		float rotate = 0, const sf::Color& color = sf::Color::White);
 };

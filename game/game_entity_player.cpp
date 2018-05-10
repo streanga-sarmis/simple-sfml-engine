@@ -14,33 +14,74 @@
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
 #include "game_entity_player.hpp"
-float x, y, angle;
+#include <iostream>//remove
+#include "game_item_ak.hpp"//remove
+#include "game_item_shotgun.hpp"//remove
+
 Player::Player() {
+	health = 4;
+
 	IDLE.initializeAnimation(4, 10);
-	WALK.initializeAnimation(7, 5);
-	bounds.height = 72;
-	bounds.width = 72;
-	bounds.left = 500;
-	bounds.top = 500;
+	WALK.initializeAnimation(6, 5);
+
+	position.x = 64 * 32;
+	position.y = 64 * 32;
+	
 	velocity.x = 0;
 	velocity.y = 0;
+
+	tileCollider.left = position.x + 12;
+	tileCollider.top  = position.y + 28;
+	tileCollider.width = 72 - 24;
+	tileCollider.height = 72 - 22;
+
+	entityCollider.left = position.x;
+	entityCollider.top = position.y;
+	entityCollider.width = 72;
+	entityCollider.height = 72;
+
 	mirrorX = false;
 	walking = false;
+	pickupInterval = 0;
+
+
+	gun = new AK(this);
+	ItemManager::addItem(gun);
+	//ItemManager::addItem(new Shotgun(300, 300));
+
+	fairy = new Fairy(this);
+	EntityManager::addEntity(fairy);
+
+	Shotgun* shotgun = new Shotgun(fairy);
+	ItemManager::addItem(shotgun);
+	fairy->holdOn(shotgun);
 }
 
 Player::~Player() {
+}
 
+void Player::touchedItem(Item* item) {
+	if (Util::isType<Item, Gun>(item) && pickupInterval == 0) {
+		pickupInterval = 60;
+		gun->setOwner(nullptr);
+		gun = dynamic_cast<Gun*>(item);
+		gun->setOwner(this);
+	}
 }
 
 void Player::touchedEntity(Entity* other) {
-
 }
 
 void Player::update(sf::RenderWindow* window, Map& map) {
-	x = sf::Mouse::getPosition(*window).x + Screen::xOff;
-	y = sf::Mouse::getPosition(*window).y + Screen::yOff;
+	iterateHurt();
+	Stats::playerHealth = health;
+	--pickupInterval;
+	if (pickupInterval < 0) {
+		pickupInterval = 0;
+	}
 
-	angle = -((std::atan2(bounds.left + 48 - x, bounds.top + 48 - 16 - y) * 180 / 3.14159265359));
+	gunAngle = -((std::atan2(position.x + 48 - (12) - (sf::Mouse::getPosition(*window).x + Screen::xOff),
+		position.y + 40 - 16 - (sf::Mouse::getPosition(*window).y + Screen::yOff)) * 180 / 3.14159265359));
 
 	if (!walking) {
 		IDLE.step();
@@ -63,43 +104,42 @@ void Player::update(sf::RenderWindow* window, Map& map) {
 		velocity.y = +6;
 	}
 
-
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-		Camera::shake();
-		EntityManager::addEntity(new BigBullet(this, bounds.left + 48 - (24 * (mirrorX ? 1 : 0)), bounds.top + 48, angle));
+		gun->use();
 	}
 
 	if (velocity.x != 0 || velocity.y != 0) {
+		tileCollider.left = position.x + 12;
+		tileCollider.top = position.y + 28;
+		entityCollider.left = position.x;
+		entityCollider.top = position.y;
 		move(velocity.x, velocity.y, map);
 		walking = true;
 	} else {
 		walking = false;
 	}
-	
 
-	if (velocity.x < 0) {
+	if (gunAngle < 0) {
 		mirrorX = true;
-	}
-
-	if (velocity.x > 0) {
+	} else if (gunAngle > 0) {
 		mirrorX = false;
 	}
 
-	if (angle < 0) {
-		mirrorX = true;
-	}
-
-	if (angle > 0) {
-		mirrorX = false;
-	}
+	gun->update(position, gunAngle, mirrorX);
+	//position.z = -position.y;
+	EntityManager::checkCollisions(this, map);
+	ItemManager::checkCollisions(this, map);
 }
 
 void Player::render(sf::RenderWindow* window, Textures& textures) {
-	Screen::renderSprite(window, textures.SHADOW, bounds.left, bounds.top, 3, 3);
+	Screen::renderSprite(window, textures.SHADOW, position.x, position.y + 10, position.z, 3, 3);
 	if (!walking) {
-		IDLE.render(window, textures.PLAYER_IDLE, bounds.left + (mirrorX ? bounds.width : 0), bounds.top, 3, 3, mirrorX);
+		IDLE.render(window, textures.PLAYER_IDLE, position.x + (mirrorX ? entityCollider.width : 0), position.y, position.z, 3, 3, mirrorX);
 	} else {
-		WALK.render(window, textures.PLAYER_WALK, bounds.left + (mirrorX ? bounds.width : 0), bounds.top, 3, 3, mirrorX);
+		WALK.render(window, textures.PLAYER_WALK, position.x + (mirrorX ? entityCollider.width : 0), position.y, position.z, 3, 3, mirrorX);
 	}
-	Screen::renderSpriteOrig(window, textures.GUN, bounds.left + 48 - (24 * (mirrorX ? 1 : 0)), bounds.top + 48, 2, 2, 12, 32, mirrorX, false, angle);
+}
+
+void Player::died() {
+
 }

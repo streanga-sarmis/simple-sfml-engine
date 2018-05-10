@@ -13,24 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\window">
+      <UniqueIdentifier>{d7e70f06-6000-449f-ac0c-a7895da77a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\screen">
+      <UniqueIdentifier>{ea0ae4a0-48bf-475b-82fb-0cfdd2d37c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{6971c9d1-b408-40a2-a07c-3dfd4eb7e5d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\level">
+      <UniqueIdentifier>{a58cadb0-c470-4a13-97ce-3825217935b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\states">
+      <UniqueIdentifier>{f9d01301-516d-449d-b783-6d4df045fa24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{c0bf23ec-b160-49b3-ae53-2c20d34addd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\items">
+      <UniqueIdentifier>{655d888e-e852-4265-a569-b3c06299bb57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\items\ak">
+      <UniqueIdentifier>{88022525-63a6-4531-83f2-2cc889586e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\items\shotgun">
+      <UniqueIdentifier>{95011c1e-1496-47db-8c4a-4a3667ff6a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities\projectiles">
+      <UniqueIdentifier>{0b3a7fb6-6604-460d-97b6-e72f4aa8a730}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities\mobs">
+      <UniqueIdentifier>{18b33fe3-81c7-4da9-a9e2-0ffa716c7ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities\particles">
+      <UniqueIdentifier>{6521f0d2-d85a-4ad0-aec1-67ae6100516c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ai">
+      <UniqueIdentifier>{c0bfe0a4-e3ea-4279-bd0d-8168f898589d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generator">
+      <UniqueIdentifier>{1fdf21ea-4518-409d-ae38-43cb3062964f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game_window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="game_app.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_screen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_state_machine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_menu_state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="game_button.cpp">
@@ -39,112 +69,247 @@
     <ClCompile Include="game_textures.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="game_map.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game_window.cpp">
+      <Filter>Source Files\window</Filter>
     </ClCompile>
-    <ClCompile Include="game_play_state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_map_loading_state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_level.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game_screen.cpp">
+      <Filter>Source Files\screen</Filter>
     </ClCompile>
     <ClCompile Include="game_entity_manager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
-    <ClCompile Include="game_entity_player.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game_level.cpp">
+      <Filter>Source Files\level</Filter>
     </ClCompile>
-    <ClCompile Include="game_pause_state.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="game_csv_parser.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game_map.cpp">
+      <Filter>Source Files\level</Filter>
     </ClCompile>
     <ClCompile Include="game_animation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\screen</Filter>
     </ClCompile>
     <ClCompile Include="game_camera.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\screen</Filter>
     </ClCompile>
-    <ClCompile Include="game_projectile.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="game_state_machine.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_play_state.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_pause_state.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_menu_state.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_map_loading_state.cpp">
+      <Filter>Source Files\states</Filter>
+    </ClCompile>
+    <ClCompile Include="game_csv_parser.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="game_item_manager.cpp">
+      <Filter>Source Files\items</Filter>
+    </ClCompile>
+    <ClCompile Include="game_item_ak.cpp">
+      <Filter>Source Files\items\ak</Filter>
+    </ClCompile>
+    <ClCompile Include="game_item_shotgun.cpp">
+      <Filter>Source Files\items\shotgun</Filter>
     </ClCompile>
     <ClCompile Include="game_big_bullet.cpp">
+      <Filter>Source Files\entities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_projectile.cpp">
+      <Filter>Source Files\entities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_player.cpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClCompile>
+    <ClCompile Include="game_particle.cpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_small_spark.cpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_animation_particle.cpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_blood_particle.cpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_slime.cpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClCompile>
+    <ClCompile Include="game_small_bullet.cpp">
+      <Filter>Source Files\entities\projectiles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_ai_manager.cpp">
+      <Filter>Source Files\ai</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_aguy.cpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_fairy.cpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClCompile>
+    <ClCompile Include="game_stats.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_hud.cpp">
+      <Filter>Source Files\screen</Filter>
+    </ClCompile>
+    <ClCompile Include="game_bullet_shell.cpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_noise_map.cpp">
+      <Filter>Source Files\generator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game_window.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_app.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_utils.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_screen.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="game_state.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_state_machine.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_menu_state.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="game_button.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_map.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_tile.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="game_textures.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_play_state.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="game_window.hpp">
+      <Filter>Source Files\window</Filter>
     </ClInclude>
-    <ClInclude Include="game_map_loading_state.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_level.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="game_entity.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="game_screen.hpp">
+      <Filter>Source Files\screen</Filter>
     </ClInclude>
     <ClInclude Include="game_entity_manager.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="game_entity_player.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="game_entity.hpp">
+      <Filter>Source Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="game_pause_state.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="game_level.hpp">
+      <Filter>Source Files\level</Filter>
     </ClInclude>
-    <ClInclude Include="game_csv_parser.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="game_map.hpp">
+      <Filter>Source Files\level</Filter>
+    </ClInclude>
+    <ClInclude Include="game_tile.hpp">
+      <Filter>Source Files\level</Filter>
     </ClInclude>
     <ClInclude Include="game_animation.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\screen</Filter>
     </ClInclude>
     <ClInclude Include="game_camera.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\screen</Filter>
     </ClInclude>
-    <ClInclude Include="game_projectile.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="game_state_machine.hpp">
+      <Filter>Source Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_play_state.hpp">
+      <Filter>Source Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_pause_state.hpp">
+      <Filter>Source Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_menu_state.hpp">
+      <Filter>Source Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_map_loading_state.hpp">
+      <Filter>Source Files\states</Filter>
+    </ClInclude>
+    <ClInclude Include="game_utils.hpp">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="game_csv_parser.hpp">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="game_wearing_entity.hpp">
+      <Filter>Source Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_manager.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_equipable.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_consumable.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_helmet.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_chestplate.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_shoes.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_gun.hpp">
+      <Filter>Source Files\items</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_ak.hpp">
+      <Filter>Source Files\items\ak</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_shotgun.hpp">
+      <Filter>Source Files\items\shotgun</Filter>
     </ClInclude>
     <ClInclude Include="game_big_bullet.hpp">
+      <Filter>Source Files\entities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_projectile.hpp">
+      <Filter>Source Files\entities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_player.hpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClInclude>
+    <ClInclude Include="game_particle.hpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_small_spark.hpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_animation_particle.hpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_blood_particle.hpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_slime.hpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClInclude>
+    <ClInclude Include="game_small_bullet.hpp">
+      <Filter>Source Files\entities\projectiles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_mob.hpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClInclude>
+    <ClInclude Include="game_ai_manager.hpp">
+      <Filter>Source Files\ai</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_aguy.hpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_fairy.hpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClInclude>
+    <ClInclude Include="game_stats.hpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_hud.hpp">
+      <Filter>Source Files\screen</Filter>
+    </ClInclude>
+    <ClInclude Include="game_bullet_shell.hpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_noise_map.hpp">
+      <Filter>Source Files\generator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

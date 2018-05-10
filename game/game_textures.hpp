@@ -23,13 +23,33 @@
 
 class Textures {
 public:
-	sf::Texture GUN;
+	sf::Texture AK;
+	sf::Texture SHOTGUN;
+
 	sf::Texture CURSOR;
 	sf::Texture SHADOW;
 	sf::Texture BIG_BULLET;
+	sf::Texture SMALL_BULLET;
+	sf::Texture BULLET_SHELL;
+
+	sf::Texture SLIME_WALK[4];
+	sf::Texture A_GUY_WALKING[2];
+	sf::Texture BANNANA_WALKING[3];
+
+	sf::Texture FAIRY[4];
+
+	sf::Texture BLOOD;
+	sf::Texture SMALL_SPARK[6];
+
+	sf::Texture MOB_IDLE[4];
+	sf::Texture MOB_WALK[7];
+
 	sf::Texture PLAYER_IDLE[4];
-	sf::Texture PLAYER_WALK[7];
-	sf::Texture TILES[15 + 2]; // 15 walls and 2 floors
+	sf::Texture PLAYER_WALK[6];
+
+	sf::Texture HEART[5];
+
+	sf::Texture TILES[16 * 16];
 
 	Textures();
 	~Textures();

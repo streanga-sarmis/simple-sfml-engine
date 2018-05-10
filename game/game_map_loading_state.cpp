@@ -16,8 +16,9 @@
 #include "game_map_loading_state.hpp"
 
 MapLoaderState::MapLoaderState() {
-	map = new Map(16, 16);
-	Log::log("Generatig terrain");
+	map = new Map();
+
+	Util::log("Generatig terrain");
 	displayed = false;
 }
 

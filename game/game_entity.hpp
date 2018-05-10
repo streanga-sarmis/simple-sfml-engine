@@ -24,14 +24,20 @@
 
 class Entity {
 protected:
-	unsigned index; // unique accross entities
-	sf::FloatRect bounds;
+	bool removed = false;
 	sf::Vector2f velocity;
 
 public:
+	bool canCollide = true;
+	unsigned index; // unique accross entities, remove this
+	sf::Vector3f position;
+	sf::FloatRect tileCollider;
+	sf::FloatRect entityCollider;
+
 	virtual void touchedEntity(Entity* other) = 0;
 	virtual void update(sf::RenderWindow* window, Map& map) = 0;
 	virtual void render(sf::RenderWindow* window, Textures& textures) = 0;
+
 	inline void move(int xa, int ya, Map& map) {
 		if (xa != 0 && ya != 0) {
 			move(xa, 0, map);
@@ -40,28 +46,16 @@ public:
 		}
 
 		if (canStep(xa, ya, map)) {
-			bounds.left += xa;
-			bounds.top += ya;
+			position.x += xa;
+			position.y += ya;
 		}
-	}
-
-	inline bool bmove(int xa, int ya, Map& map) {
-		if (xa != 0 && ya != 0) {
-			bmove(xa, 0, map);
-			bmove(0, ya, map);
-			return true;
-		}
-
-		bounds.left += xa;
-		bounds.top += ya;
-		return canStep(xa, ya, map);
 	}
 
 	inline bool canStep(int xa, int ya, Map& map) {
-		int x0 = (int)(bounds.left + xa + 10) >> 6;
-		int y0 = (int)(bounds.top + ya + 48) >> 6;
-		int x1 = (int)((int)(xa + bounds.left + bounds.width - 10) >> 6);
-		int y1 = (int)((int)(ya + bounds.top + bounds.height - 10) >> 6);
+		int x0 = (int)(tileCollider.left + xa) >> 6; // these things might cause the bullets not getting destroyed in the walls
+		int y0 = (int)(tileCollider.top + ya) >> 6; // the bounds might benegative in some cases so its not iterating correctly
+		int x1 = (int)((int)(xa + tileCollider.left + tileCollider.width) >> 6);
+		int y1 = (int)((int)(ya + tileCollider.top + tileCollider.height) >> 6);
 
 		for (int y = y0; y <= y1; ++y) {
 			for (int x = x0; x <= x1; ++x) {
@@ -75,6 +69,11 @@ public:
 			}
 		}
 		return true;
+	}
+
+	inline void knock(float angle) {
+		velocity.x += -std::cos((angle + 90) * 3.14159265359 / 180) * 3;
+		velocity.y += -std::sin((angle + 90) * 3.14159265359 / 180) * 3;
 	}
 
 	friend class EntityManager;

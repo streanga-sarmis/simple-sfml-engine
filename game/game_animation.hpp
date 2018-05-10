@@ -21,14 +21,16 @@ class Animation {
 
 private:
 	unsigned time;
-	unsigned frames;
 	unsigned interval;
 
 public:
+	unsigned frames;
+
 	Animation();
 	~Animation();
 
 	void initializeAnimation(unsigned frames, unsigned interval);
 	void step();
-	void render(sf::RenderWindow* window, sf::Texture* textures, int x, int y, int xs, int ys, bool mx = false, bool my = false);
+	void render(sf::RenderWindow* window, sf::Texture* textures, int x, int y, float z, int xs, int ys, bool mx = false, bool my = false,
+		const sf::Color& color = sf::Color::White);
 };

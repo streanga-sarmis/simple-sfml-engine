@@ -19,9 +19,13 @@
 
 #include "game_map.hpp"
 #include "game_camera.hpp"
+#include "game_entity.hpp"
 #include "game_textures.hpp"
+#include "game_ai_manager.hpp"
+#include "game_item_manager.hpp"
 #include "game_entity_player.hpp"
 #include "game_entity_manager.hpp"
+
 
 class Level {
 private:

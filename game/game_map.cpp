@@ -15,16 +15,26 @@
 
 #include "game_map.hpp"
 
-Map::Map(){
+Map::Map():
+width(64), height(64){
 
-}
+	NoiseMap noiseMap(width, height);
 
-Map::Map(unsigned w, unsigned h):
-width(w), height(h) {
+	noiseMap.randomizeData();
+	noiseMap.organizeData();
 
 	tiles = new Tile[width * height];
 	overlayTiles = new Tile[width * height];
 	collisionTiles = new Tile[width * height];
+
+	for (int y = 0; y < height; ++y) {
+		for (int x = 0; x < width; ++x) {
+			tiles[x + y * width].type = noiseMap.groundData[x + y * width];
+			collisionTiles[x + y * width].type = noiseMap.collisionData[x + y * width];
+			overlayTiles[x + y * width].type = noiseMap.overlayData[x + y * width];
+		}
+	}
+
 	loaded = false;
 }
 
@@ -35,6 +45,7 @@ Map::~Map() {
 }
 
 void Map::mapRolesToTiles() {
+	/*
 	CSVParser::Data gTiles = CSVParser::parseFileToData("res/maps/map_ground.csv");
 	CSVParser::Data oTiles = CSVParser::parseFileToData("res/maps/map_overlay.csv");
 	CSVParser::Data cTiles = CSVParser::parseFileToData("res/maps/map_collision.csv");
@@ -51,6 +62,7 @@ void Map::mapRolesToTiles() {
 	CSVParser::clearData(gTiles);
 	CSVParser::clearData(oTiles);
 	CSVParser::clearData(cTiles);
+	*/
 	loaded = true;
 }
 
@@ -66,8 +78,12 @@ Tile Map::getTile(Tile tile, int position) {
 	return tiles[position];
 }
 
+void Map::renderTileNoSort(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y) {
+	Screen::renderSpriteNoSort(window, textures.TILES[type], x * 64, y * 64, 4, 4);
+}
+
 void Map::renderTile(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y) {
-	Screen::renderSprite(window, textures.TILES[type], x * 64, y * 64, 4, 4);
+	Screen::renderSprite(window, textures.TILES[type], x * 64, y * 64, 0, 4, 4);
 }
 
 void Map::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1) {
@@ -77,7 +93,7 @@ void Map::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, i
 				continue;
 			}
 			if (tiles[x + y * width].type != -1) {
-				renderTile(window, textures, tiles[x + y * width].type, x, y);
+				renderTileNoSort(window, textures, tiles[x + y * width].type, x, y);
 			}
 		}
 	}

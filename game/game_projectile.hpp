@@ -14,15 +14,16 @@
 #pragma once
 
 #include "game_entity.hpp"
+#include "game_item_gun.hpp"
 
 class Projectile : public Entity{
 protected:
-	Entity* owner;
+	Gun* owner;
 	int damage;
 	int speed;
 	float angle;
 
 public:
-	Projectile(Entity* owner, int x, int y, float angle);
+	Projectile(Gun* owner, int x, int y, float angle);
 	~Projectile();
 };

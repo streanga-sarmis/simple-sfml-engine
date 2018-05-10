@@ -14,28 +14,57 @@
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
 #include "game_level.hpp"
+#include "game_entity_slime.hpp"//remove
+#include "game_entity_aguy.hpp"//remove
 
 Level::Level(Map* map):
 map(map){
 	player = new Player();
-	EntityManager::initializeEntityArray();
+
+	AIManager::initializeAiManager(player);
+	EntityManager::initializeEntityMapping(*map);
+	ItemManager::initializeItemMapping(*map);
+
 	EntityManager::addEntity(player);
+
+	for (int i = 0; i < 0; ++i) {
+		EntityManager::addEntity(new Slime(200, 300));
+	}
+
+	for (int i = 0; i < 0; ++i) {
+		EntityManager::addEntity(new AGuy(200, 300));
+	}
+
+	for (int y = 0; y < map->height; ++y) {
+		for (int x = 0; x < map->width; ++x) {
+			if (std::rand() % 100 == 2 && map->collisionTiles[x + y * map->width].type) {
+				EntityManager::addEntity(new Slime((x << 6), (y << 6)));
+			}
+		}
+	}
 }
 
 Level::~Level() {
 	EntityManager::clearEntities();
+	ItemManager::clearItems(); // don't forget about this when implementing multiple levels
 }
 
 void Level::update(sf::RenderWindow* window) {
 	EntityManager::update(window, *map);
+	ItemManager::updateOffHand(*map);
+	ItemManager::updateOnHand(*map);
 }
 
 void Level::render(sf::RenderWindow* window, Textures& textures) {
-	Camera::computeScreenBounds(player->bounds.left, player->bounds.top, window->getSize().x, window->getSize().y);
+	Camera::computeScreenBounds(player->position.x, player->position.y, window->getSize().x, window->getSize().y);
 
 	map->render(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
 
+	ItemManager::renderOffHand(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
+
 	EntityManager::render(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
+
+	ItemManager::renderOnHand(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
 
 	map->renderOverlay(window, textures, Camera::x0, Camera::y0, Camera::x1, Camera::y1);
 }

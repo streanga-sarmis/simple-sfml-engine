@@ -13,12 +13,10 @@
 
 #include "game_projectile.hpp"
 
-Projectile::Projectile(Entity* owner, int x, int y, float angle):
+Projectile::Projectile(Gun* owner, int x, int y, float angle):
 owner(owner), angle(angle){
-	bounds.left = x;
-	bounds.top = y;
-	bounds.width = 48; // 16 scaled 3 times
-	bounds.height = 48;
+	position.x = x;
+	position.y = y;
 }
 
 Projectile::~Projectile() {

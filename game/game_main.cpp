@@ -19,13 +19,13 @@
 
 int main(){
 
-	Log::log("Making the window...");
+	Util::log("Making the window...");
 	Window window;
 
-	Log::log("Starting the app...");
+	Util::log("Starting the app...");
 	App app;
 
-	Log::log("Running...");
+	Util::log("Running...");
 	app.run(window.getWindow());
 
 	return 0;

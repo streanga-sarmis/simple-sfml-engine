@@ -24,10 +24,10 @@ void Camera::computeScreenBounds(int xc, int yc, unsigned wx, unsigned wy) {
 	xs = xc - wx / 2;
 	ys = yc - wy / 2;
 
-	x0 = xs >> 6;
-	y0 = ys >> 6;
-	x1 = x0 + ((wx + 64) >> 6);
-	y1 = y0 + ((wy + 64) >> 6);
+	x0 = (xs - 64) >> 6;
+	y0 = (ys - 64) >> 6;
+	x1 = x0 + ((wx + 64 + 64) >> 6);
+	y1 = y0 + ((wy + 64 + 64) >> 6);
 }
 
 void Camera::update() {
@@ -35,7 +35,7 @@ void Camera::update() {
 }
 
 void Camera::shake() {
-	xs += std::rand() % 5;
-	ys += std::rand() % 5;
+	xs += std::rand() % 10;
+	ys += std::rand() % 10;
 	Screen::offset(xs, ys);
 }
