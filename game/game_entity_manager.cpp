@@ -28,22 +28,27 @@ void EntityManager::removeEntity(Entity* e) {
 }
 
 void EntityManager::checkCollisions(Entity* th, Map& map) {
-	int x = (int)(th->position.x) >> 6;
-	int y = (int)(th->position.y) >> 6;
-	if (x >= 0 && x < map.width && y >= 0 && y < map.height) {
-		for (std::list<Entity*>::iterator it = entitiesInTiles[x + y * map.width].begin();
-			it != entitiesInTiles[x + y * map.width].end();) {
-			// remember to make collision bounds
-			if ((*it) != th) {
-				if (th->entityCollider.intersects((*it)->entityCollider)) {
-					th->touchedEntity(*it++);
+	int x0 = ((int)(th->position.x) >> 6) - 1;
+	int y0 = ((int)(th->position.y) >> 6) - 1;
+	int x1 = ((int)(th->position.x) >> 6) + 1;
+	int y1 = ((int)(th->position.y) >> 6) + 1;
+
+	if (x0 >= 0 && x1 < map.width && y0 >= 0 && y1 < map.height) {
+		for (int y = y0; y < y1; ++y) {
+			for (int x = x0; x < x1; ++x) {
+				for (std::list<Entity*>::iterator it = entitiesInTiles[x + y * map.width].begin();
+					it != entitiesInTiles[x + y * map.width].end();) {
+					// remember to make collision bounds
+					if ((*it) != th) {
+						if (th->entityCollider.intersects((*it)->entityCollider)) {
+							th->touchedEntity(*it++);
+						} else {
+							*it++;
+						}
+					} else {
+						*it++;
+					}
 				}
-				else {
-					*it++;
-				}
-			}
-			else {
-				*it++;
 			}
 		}
 	}

@@ -22,7 +22,7 @@ Player::Player() {
 	health = 4;
 
 	IDLE.initializeAnimation(4, 10);
-	WALK.initializeAnimation(6, 5);
+	WALK.initializeAnimation(8, 5);
 
 	position.x = 64 * 32;
 	position.y = 64 * 32;
@@ -66,6 +66,14 @@ void Player::touchedItem(Item* item) {
 		gun->setOwner(nullptr);
 		gun = dynamic_cast<Gun*>(item);
 		gun->setOwner(this);
+	} else if(Util::isType<Item, ConsumableItem>(item)) {
+		ConsumableItem* pickedOne = dynamic_cast<ConsumableItem*>(item);
+		currency += pickedOne->bonusCurrency;
+		ammobonus += pickedOne->bonusAmmo;
+		health += pickedOne->bonusHeath;
+		regeneration += pickedOne->bonusReg;
+		speedbonus += pickedOne->bonusSpeed;
+		pickedOne->picked();
 	}
 }
 
@@ -75,6 +83,8 @@ void Player::touchedEntity(Entity* other) {
 void Player::update(sf::RenderWindow* window, Map& map) {
 	iterateHurt();
 	Stats::playerHealth = health;
+	Stats::playerGun = gun;
+
 	--pickupInterval;
 	if (pickupInterval < 0) {
 		pickupInterval = 0;
@@ -126,7 +136,7 @@ void Player::update(sf::RenderWindow* window, Map& map) {
 	}
 
 	gun->update(position, gunAngle, mirrorX);
-	//position.z = -position.y;
+	position.z = position.y + entityCollider.height / 2;
 	EntityManager::checkCollisions(this, map);
 	ItemManager::checkCollisions(this, map);
 }

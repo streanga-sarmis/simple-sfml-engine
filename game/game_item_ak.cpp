@@ -23,6 +23,7 @@ AK::AK(WearingEntity* owner) {
 	bounds.height = 48;
 	shotInterval = 15; // move these in the Gun constructor
 	shotIterator = shotInterval;
+	SHOOT.initializeAnimation(3, shotInterval / 3);
 }
 
 AK::AK(float x, float y) {
@@ -34,6 +35,7 @@ AK::AK(float x, float y) {
 	bounds.height = 48;
 	shotInterval = 15;
 	shotIterator = shotInterval;
+	SHOOT.initializeAnimation(3, shotInterval / 3);
 }
 
 AK::~AK() {
@@ -53,18 +55,31 @@ void AK::use(){
 void AK::update(const sf::Vector3f& position, float angle, bool mirrorX) {
 	if (shotIterator < shotInterval) {
 		++shotIterator;
+		SHOOT.step();
 	}
 	this->angle = angle;
 	this->mirrorX = mirrorX;
 	this->bounds.left = position.x;
 	this->bounds.top = position.y;
-	z = position.z;
+	z = position.z + 12;
 }
 
 void AK::render(sf::RenderWindow* window, Textures& textures) {
 	if (onHand) {
-		Screen::renderSpriteOrig(window, textures.AK, bounds.left + 48 - (24 * (mirrorX ? 1 : 0)), bounds.top + 40, z, 2, 2, 12, 32, mirrorX, false, angle);
+		if (shotIterator != shotInterval) {
+			SHOOT.renderOrig(window, textures.AK, bounds.left + 48 - (24 * (mirrorX ? 1 : 0)), bounds.top + 56, z, 2, 2, 24, 48, mirrorX, false, angle);
+		} else {
+			Screen::renderSpriteOrig(window, textures.AK[0], bounds.left + 48 - (24 * (mirrorX ? 1 : 0)), bounds.top + 56, z, 2, 2, 24, 48, mirrorX, false, angle);
+		}
 	} else {
-		Screen::renderSprite(window, textures.AK, bounds.left + bounds.width / 2, bounds.top + bounds.height / 2, z, 2, 2, false, false, angle);
+		Screen::renderSprite(window, textures.AK[0], bounds.left + bounds.width / 2, bounds.top + bounds.height / 2, z, 2, 2, false, false, angle);
+	}
+}
+
+void AK::renderIcon(sf::RenderWindow* window, Textures& textures, int x, int y, int z) {
+	if (shotIterator != shotInterval) {
+		SHOOT.renderOrig(window, textures.AK, x + 48, y + 40, z, 4, 4, 24, 48, false, true, 90);
+	} else {
+		Screen::renderSpriteOrig(window, textures.AK[0], x + 48, y + 40, z, 4, 4, 24, 48, false, true, 90);
 	}
 }

@@ -30,6 +30,7 @@ public:
 	bool removed = false;
 	bool mirrorX = false;
 	bool onHand = false;
+	int bonusCurrency;
 	int bonusReg;
 	int bonusAmmo;
 	int bonusHeath;
@@ -41,25 +42,11 @@ public:
 	}
 
 	virtual void use() = 0;
-
-	inline void update() {
-		oldBounds.x = bounds.left;
-		oldBounds.y = bounds.top;
-
-		if (!onHand) {
-			if (velocity.x < 4) {
-				if (velocity.y > 10) {
-					velocity.y *= -0.9;
-				} else {
-					velocity.y += gravity;
-				}
-				velocity.x += 0.1;
-				bounds.left += velocity.x;
-				bounds.top += velocity.y;
-			}
-		}
-	}
+	// add collision detection for items, to prevent them going into the walls after dropping
+	// resulting in it being impossible to pick
+	virtual void updateOnGround() = 0;
 
 	virtual void update(const sf::Vector3f& position, float angle, bool mirrorX) = 0;
 	virtual void render(sf::RenderWindow* window, Textures& textures) = 0;
+	virtual void renderIcon(sf::RenderWindow* window, Textures& textures, int x, int y, int z) = 0;
 };

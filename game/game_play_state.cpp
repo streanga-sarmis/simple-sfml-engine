@@ -46,8 +46,8 @@ void PlayState::render(sf::RenderWindow* window) {
 
 	level->render(window, textures);
 
-	HUD::render(window, textures);
 
 	Screen::sortAndRender(window);
+	HUD::render(window, textures);
 	window->draw(cursor);
 }

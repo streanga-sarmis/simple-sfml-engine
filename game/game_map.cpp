@@ -83,7 +83,7 @@ void Map::renderTileNoSort(sf::RenderWindow* window, Textures& textures, unsigne
 }
 
 void Map::renderTile(sf::RenderWindow* window, Textures& textures, unsigned char type, int x, int y) {
-	Screen::renderSprite(window, textures.TILES[type], x * 64, y * 64, 0, 4, 4);
+	Screen::renderSprite(window, textures.TILES[type], x * 64, y * 64, 9999, 4, 4);
 }
 
 void Map::render(sf::RenderWindow* window, Textures& textures, int x0, int y0, int x1, int y1) {

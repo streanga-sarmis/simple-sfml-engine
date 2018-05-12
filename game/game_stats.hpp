@@ -15,8 +15,10 @@
 
 #pragma once
 
+#include "game_item_gun.hpp"
+
 class Stats{
 public:
 	static int playerHealth;
-
+	static Gun* playerGun;
 };

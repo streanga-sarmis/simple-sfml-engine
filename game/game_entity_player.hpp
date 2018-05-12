@@ -24,6 +24,7 @@
 #include "game_item_manager.hpp"
 #include "game_entity_manager.hpp"
 #include "game_wearing_entity.hpp"
+#include "game_item_consumable.hpp"
 
 class Player : public WearingEntity {
 private:

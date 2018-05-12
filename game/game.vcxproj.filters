@@ -34,12 +34,6 @@
     <Filter Include="Source Files\items">
       <UniqueIdentifier>{655d888e-e852-4265-a569-b3c06299bb57}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\items\ak">
-      <UniqueIdentifier>{88022525-63a6-4531-83f2-2cc889586e79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\items\shotgun">
-      <UniqueIdentifier>{95011c1e-1496-47db-8c4a-4a3667ff6a79}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\entities\projectiles">
       <UniqueIdentifier>{0b3a7fb6-6604-460d-97b6-e72f4aa8a730}</UniqueIdentifier>
     </Filter>
@@ -54,6 +48,18 @@
     </Filter>
     <Filter Include="Source Files\generator">
       <UniqueIdentifier>{1fdf21ea-4518-409d-ae38-43cb3062964f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\items\equipable">
+      <UniqueIdentifier>{a2b9caa8-128b-4cf7-8703-6ac7557b74b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\items\equipable\ak">
+      <UniqueIdentifier>{88022525-63a6-4531-83f2-2cc889586e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\items\equipable\shotgun">
+      <UniqueIdentifier>{95011c1e-1496-47db-8c4a-4a3667ff6a79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\items\consumable">
+      <UniqueIdentifier>{1a0f34d2-8692-447b-9123-00d07c79effa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,10 +118,10 @@
       <Filter>Source Files\items</Filter>
     </ClCompile>
     <ClCompile Include="game_item_ak.cpp">
-      <Filter>Source Files\items\ak</Filter>
+      <Filter>Source Files\items\equipable\ak</Filter>
     </ClCompile>
     <ClCompile Include="game_item_shotgun.cpp">
-      <Filter>Source Files\items\shotgun</Filter>
+      <Filter>Source Files\items\equipable\shotgun</Filter>
     </ClCompile>
     <ClCompile Include="game_big_bullet.cpp">
       <Filter>Source Files\entities\projectiles</Filter>
@@ -138,17 +144,11 @@
     <ClCompile Include="game_blood_particle.cpp">
       <Filter>Source Files\entities\particles</Filter>
     </ClCompile>
-    <ClCompile Include="game_entity_slime.cpp">
-      <Filter>Source Files\entities\mobs</Filter>
-    </ClCompile>
     <ClCompile Include="game_small_bullet.cpp">
       <Filter>Source Files\entities\projectiles</Filter>
     </ClCompile>
     <ClCompile Include="game_ai_manager.cpp">
       <Filter>Source Files\ai</Filter>
-    </ClCompile>
-    <ClCompile Include="game_entity_aguy.cpp">
-      <Filter>Source Files\entities\mobs</Filter>
     </ClCompile>
     <ClCompile Include="game_entity_fairy.cpp">
       <Filter>Source Files\entities\mobs</Filter>
@@ -164,6 +164,18 @@
     </ClCompile>
     <ClCompile Include="game_noise_map.cpp">
       <Filter>Source Files\generator</Filter>
+    </ClCompile>
+    <ClCompile Include="game_impact_particle.cpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_boom_particle.cpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClCompile>
+    <ClCompile Include="game_item_gem.cpp">
+      <Filter>Source Files\items\consumable</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_blue_gem_enemy.cpp">
+      <Filter>Source Files\entities\mobs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -236,29 +248,11 @@
     <ClInclude Include="game_item.hpp">
       <Filter>Source Files\items</Filter>
     </ClInclude>
-    <ClInclude Include="game_item_equipable.hpp">
-      <Filter>Source Files\items</Filter>
-    </ClInclude>
-    <ClInclude Include="game_item_consumable.hpp">
-      <Filter>Source Files\items</Filter>
-    </ClInclude>
-    <ClInclude Include="game_item_helmet.hpp">
-      <Filter>Source Files\items</Filter>
-    </ClInclude>
-    <ClInclude Include="game_item_chestplate.hpp">
-      <Filter>Source Files\items</Filter>
-    </ClInclude>
-    <ClInclude Include="game_item_shoes.hpp">
-      <Filter>Source Files\items</Filter>
-    </ClInclude>
-    <ClInclude Include="game_item_gun.hpp">
-      <Filter>Source Files\items</Filter>
-    </ClInclude>
     <ClInclude Include="game_item_ak.hpp">
-      <Filter>Source Files\items\ak</Filter>
+      <Filter>Source Files\items\equipable\ak</Filter>
     </ClInclude>
     <ClInclude Include="game_item_shotgun.hpp">
-      <Filter>Source Files\items\shotgun</Filter>
+      <Filter>Source Files\items\equipable\shotgun</Filter>
     </ClInclude>
     <ClInclude Include="game_big_bullet.hpp">
       <Filter>Source Files\entities\projectiles</Filter>
@@ -281,9 +275,6 @@
     <ClInclude Include="game_blood_particle.hpp">
       <Filter>Source Files\entities\particles</Filter>
     </ClInclude>
-    <ClInclude Include="game_entity_slime.hpp">
-      <Filter>Source Files\entities\mobs</Filter>
-    </ClInclude>
     <ClInclude Include="game_small_bullet.hpp">
       <Filter>Source Files\entities\projectiles</Filter>
     </ClInclude>
@@ -292,9 +283,6 @@
     </ClInclude>
     <ClInclude Include="game_ai_manager.hpp">
       <Filter>Source Files\ai</Filter>
-    </ClInclude>
-    <ClInclude Include="game_entity_aguy.hpp">
-      <Filter>Source Files\entities\mobs</Filter>
     </ClInclude>
     <ClInclude Include="game_entity_fairy.hpp">
       <Filter>Source Files\entities\mobs</Filter>
@@ -310,6 +298,36 @@
     </ClInclude>
     <ClInclude Include="game_noise_map.hpp">
       <Filter>Source Files\generator</Filter>
+    </ClInclude>
+    <ClInclude Include="game_impact_particle.hpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_boom_particle.hpp">
+      <Filter>Source Files\entities\particles</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_gun.hpp">
+      <Filter>Source Files\items\equipable</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_helmet.hpp">
+      <Filter>Source Files\items\equipable</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_shoes.hpp">
+      <Filter>Source Files\items\equipable</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_chestplate.hpp">
+      <Filter>Source Files\items\equipable</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_equipable.hpp">
+      <Filter>Source Files\items\equipable</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_consumable.hpp">
+      <Filter>Source Files\items\consumable</Filter>
+    </ClInclude>
+    <ClInclude Include="game_item_gem.hpp">
+      <Filter>Source Files\items\consumable</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_blue_gem_enemy.hpp">
+      <Filter>Source Files\entities\mobs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

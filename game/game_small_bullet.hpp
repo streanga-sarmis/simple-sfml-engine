@@ -14,9 +14,10 @@
 #pragma once
 
 #include "game_mob.hpp"
-#include "game_projectile.hpp"
 #include "game_particle.hpp"
+#include "game_projectile.hpp"
 #include "game_entity_manager.hpp" // remove
+#include "game_impact_particle.hpp"
 
 class SmallBullet : public Projectile {
 public:

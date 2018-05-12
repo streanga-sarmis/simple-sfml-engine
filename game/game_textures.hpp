@@ -23,18 +23,25 @@
 
 class Textures {
 public:
-	sf::Texture AK;
 	sf::Texture SHOTGUN;
 
 	sf::Texture CURSOR;
 	sf::Texture SHADOW;
+	sf::Texture BULLET_HUD;
+	sf::Texture GUN_FRAME;
 	sf::Texture BIG_BULLET;
 	sf::Texture SMALL_BULLET;
 	sf::Texture BULLET_SHELL;
 
-	sf::Texture SLIME_WALK[4];
-	sf::Texture A_GUY_WALKING[2];
-	sf::Texture BANNANA_WALKING[3];
+	sf::Texture GEMS[7 * 2];
+
+	sf::Texture BOOM_PARTICLE[9];
+	sf::Texture IMPACT_PARTICLE[5];
+
+	sf::Texture BLUE_GEM_ENEMY_IDLE[7];
+	sf::Texture BLUE_GEM_ENEMY_WALK[5];
+
+	sf::Texture AK[3];
 
 	sf::Texture FAIRY[4];
 
@@ -45,7 +52,7 @@ public:
 	sf::Texture MOB_WALK[7];
 
 	sf::Texture PLAYER_IDLE[4];
-	sf::Texture PLAYER_WALK[6];
+	sf::Texture PLAYER_WALK[8];
 
 	sf::Texture HEART[5];
 

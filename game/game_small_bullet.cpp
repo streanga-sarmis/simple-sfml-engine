@@ -41,13 +41,15 @@ void SmallBullet::touchedEntity(Entity* other) {
 	if (other != owner->owner && !Util::isType<Entity, Particle>(other)
 		&& !Util::isType<Entity, Projectile>(other) && Util::isType<Entity, Mob>(other)) {
 		dynamic_cast<Mob*>(other)->hurt(2, angle);
+		EntityManager::addEntity(new ImpactParticle(position.x, position.y, angle, 15));
 		EntityManager::removeEntity(this);
 	}
 }
-
+#include "game_boom_particle.hpp" //remove
 void SmallBullet::update(sf::RenderWindow* window, Map& map) {
 	// put the update method in the projectile not here
 	if (!canStep(velocity.x, velocity.y, map)) {
+		EntityManager::addEntity(new ImpactParticle(position.x, position.y, angle, 15));
 		EntityManager::removeEntity(this);
 	}
 

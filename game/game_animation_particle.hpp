@@ -25,6 +25,7 @@
 class AnimationParticle : public Entity {
 
 protected:
+	float angle;
 	float speed = 4;
 	Animation frames;
 	int lifetime = 0;
@@ -34,6 +35,7 @@ public:
 	AnimationParticle(float x, float y, float angle, int lifetime);
 	~AnimationParticle();
 
+	void touchedEntity(Entity* other) override;
 	void update(sf::RenderWindow* window, Map& map) override;
 
 };

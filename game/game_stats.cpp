@@ -16,3 +16,4 @@
 #include "game_stats.hpp"
 
 int Stats::playerHealth;
+Gun* Stats::playerGun;

@@ -15,10 +15,12 @@
 
 #pragma once
 
+#include "game_animation.hpp"
 #include "game_item_equipable.hpp"
 
 class Gun : public EquipableItem {
 protected:
+	Animation SHOOT;
 	int shotInterval;
 	int shotIterator;
 };

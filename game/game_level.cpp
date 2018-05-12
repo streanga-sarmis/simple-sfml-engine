@@ -14,8 +14,7 @@
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
 #include "game_level.hpp"
-#include "game_entity_slime.hpp"//remove
-#include "game_entity_aguy.hpp"//remove
+#include "game_entity_blue_gem_enemy.hpp"//remove
 
 Level::Level(Map* map):
 map(map){
@@ -27,18 +26,10 @@ map(map){
 
 	EntityManager::addEntity(player);
 
-	for (int i = 0; i < 0; ++i) {
-		EntityManager::addEntity(new Slime(200, 300));
-	}
-
-	for (int i = 0; i < 0; ++i) {
-		EntityManager::addEntity(new AGuy(200, 300));
-	}
-
 	for (int y = 0; y < map->height; ++y) {
 		for (int x = 0; x < map->width; ++x) {
-			if (std::rand() % 100 == 2 && map->collisionTiles[x + y * map->width].type) {
-				EntityManager::addEntity(new Slime((x << 6), (y << 6)));
+			if (std::rand() % 10 == 2 && map->collisionTiles[x + y * map->width].type) {
+				EntityManager::addEntity(new BlueGemEnemy((x << 6), (y << 6)));
 			}
 		}
 	}

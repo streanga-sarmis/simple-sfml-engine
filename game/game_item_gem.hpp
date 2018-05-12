@@ -15,22 +15,21 @@
 
 #pragma once
 
-#include "game_mob.hpp"
-#include "game_animation.hpp"
+#include <SFML/Graphics.hpp>
 
-class Slime : public Mob {
+#include "game_animation.hpp"
+#include "game_item_consumable.hpp"
+#include "game_ai_manager.hpp"//remove
+
+
+class Gem : public ConsumableItem {
 private:
-	Animation IDLE;
-	Animation WALK;
-	bool mirrorX;
-	bool walking;
+	int currentIcon;
 
 public:
-	Slime(float x, float y);
-	~Slime();
+	Gem(int x, int y);
+	~Gem();
 
-	void touchedEntity(Entity* other) override;
-	void update(sf::RenderWindow* window, Map& map) override;
+	void updateOnGround() override;
 	void render(sf::RenderWindow* window, Textures& textures) override;
-	void died() override;
 };

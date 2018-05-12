@@ -25,6 +25,7 @@
 class WearingEntity : public Mob{
 protected:
 	//stats
+	int currency;
 	float regeneration;
 	float speedbonus;
 	float ammobonus;
@@ -36,4 +37,6 @@ protected:
 
 public:
 	virtual void touchedItem(Item* item) = 0;
+
+	friend class ConsumableItem;
 };

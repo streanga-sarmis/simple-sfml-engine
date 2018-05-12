@@ -31,7 +31,7 @@ owner(owner){
 	tileCollider.width = 32;
 	tileCollider.height = 32;
 
-	position.z = 999;
+	position.z = 99999;
 	canCollide = false;
 }
 
@@ -73,6 +73,7 @@ void Fairy::update(sf::RenderWindow* window, Map& map) {
 	if (gun != nullptr) {
 		gun->update(sf::Vector3f(position.x - 32, position.y - 16, position.z), 75, false);
 	}
+	//position.z = position.y + entityCollider.height / 2;
 }
 
 void Fairy::render(sf::RenderWindow* window, Textures& textures) {

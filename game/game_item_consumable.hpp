@@ -16,7 +16,25 @@
 #pragma once
 
 #include "game_item.hpp"
+#include "game_item_manager.hpp"
 
 class ConsumableItem : public Item {
+protected:
+	bool followPlayer = false;
+	Animation frames;
 
+public:
+	inline void picked() {
+		ItemManager::removeItem(this);
+		// generate some kind of nice particle
+	}
+
+	inline void use() override {
+	}
+
+	inline void update(const sf::Vector3f& position, float angle, bool mirrorX) override {
+	}
+
+	inline void renderIcon(sf::RenderWindow* window, Textures& textures, int x, int y, int z) override {
+	}
 };

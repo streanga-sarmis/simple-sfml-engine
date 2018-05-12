@@ -13,14 +13,13 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#include "game_entity_aguy.hpp"
-#include "game_item_shotgun.hpp"//remove
+#include "game_entity_blue_gem_enemy.hpp"
 
-AGuy::AGuy(float x, float y) {
+BlueGemEnemy::BlueGemEnemy(float x, float y) {
 	health = 15;
 
-	IDLE.initializeAnimation(1, 1); // one frame animation make a workaround
-	WALK.initializeAnimation(2, 10);
+	IDLE.initializeAnimation(7, 10); // one frame animation make a workaround
+	WALK.initializeAnimation(5, 10);
 
 	position.x = x;
 	position.y = y;
@@ -35,22 +34,21 @@ AGuy::AGuy(float x, float y) {
 
 	entityCollider.left = position.x;
 	entityCollider.top = position.y;
-	entityCollider.width = 72;
+	entityCollider.width = 64;
 	entityCollider.height = 96;
 
 	mirrorX = false;
 	walking = false;
 	pickupInterval = 0;
 
-
 	gun = new Shotgun(this);
 	ItemManager::addItem(gun);
 }
 
-AGuy::~AGuy() {
+BlueGemEnemy::~BlueGemEnemy() {
 }
 
-void AGuy::touchedItem(Item* item) {
+void BlueGemEnemy::touchedItem(Item* item) {
 	if (Util::isType<Item, Gun>(item) && pickupInterval == 0) {
 		pickupInterval = 60;
 		gun->setOwner(nullptr);
@@ -59,10 +57,10 @@ void AGuy::touchedItem(Item* item) {
 	}
 }
 
-void AGuy::touchedEntity(Entity* other) {
+void BlueGemEnemy::touchedEntity(Entity* other) {
 }
 
-void AGuy::update(sf::RenderWindow* window, Map& map) {
+void BlueGemEnemy::update(sf::RenderWindow* window, Map& map) {
 	iterateHurt();
 	--pickupInterval;
 	if (pickupInterval < 0) {
@@ -112,24 +110,32 @@ void AGuy::update(sf::RenderWindow* window, Map& map) {
 	if (gunAngle > 0) {
 		mirrorX = false;
 	}
-
-	gun->update(position, gunAngle, mirrorX);
+	position.z = position.y + entityCollider.height / 2;
+	gun->update(sf::Vector3f(position.x, position.y + 24, position.z), gunAngle, mirrorX);
 	EntityManager::checkCollisions(this, map);
 	ItemManager::checkCollisions(this, map);
 }
 
-void AGuy::render(sf::RenderWindow* window, Textures& textures) {
+void BlueGemEnemy::render(sf::RenderWindow* window, Textures& textures) {
 	if (!walking) {
-		IDLE.render(window, textures.A_GUY_WALKING, position.x + (mirrorX ? entityCollider.width : 0), position.y, position.z, 3, 3, mirrorX, false, ((hurtIterator != hurtDelay) ?
-			sf::Color::Blue : sf::Color::White));
+		IDLE.render(window, textures.BLUE_GEM_ENEMY_IDLE, position.x + (mirrorX ? entityCollider.width : 0), position.y, position.z, 1, 1, mirrorX, false, 0,
+			((hurtIterator != hurtDelay) ? sf::Color::Blue : sf::Color::White));
 	}
 	else {
-		WALK.render(window, textures.A_GUY_WALKING, position.x + (mirrorX ? entityCollider.width : 0), position.y, position.z, 3, 3, mirrorX, false, ((hurtIterator != hurtDelay) ?
-			sf::Color::Blue : sf::Color::White));
+		WALK.render(window, textures.BLUE_GEM_ENEMY_WALK, position.x + (mirrorX ? entityCollider.width : 0), position.y, position.z, 1, 1, mirrorX, false, 0,
+			((hurtIterator != hurtDelay) ? sf::Color::Blue : sf::Color::White));
 	}
 }
 
-void AGuy::died() {
+void BlueGemEnemy::died() {
 	ItemManager::removeItem(gun);
+	for (int i = 0; i < 4; ++i) {
+		EntityManager::addEntity(new BoomParticle(position.x + entityCollider.width / 2 + (std::rand() % 20) * (std::rand() % 2 ? -1 : 1),
+			position.y + entityCollider.height / 2 + (std::rand() % 20) * (std::rand() % 2 ? -1 : 1), (std::rand() % 20) + 36, i));
+	}
+	for (int i = 0; i < 5; ++i) {
+		ItemManager::addItem(new Gem(position.x, position.y));
+	}
+
 	EntityManager::removeEntity(this);
 }

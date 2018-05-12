@@ -31,6 +31,7 @@ public:
 	void use() override;
 	void update(const sf::Vector3f& position, float angle, bool mirrorX) override;
 	void render(sf::RenderWindow* window, Textures& textures) override;
+	void renderIcon(sf::RenderWindow* window, Textures& textures, int x, int y, int z) override;
 
 	friend class Projectile;
 };

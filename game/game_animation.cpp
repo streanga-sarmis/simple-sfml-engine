@@ -31,6 +31,10 @@ void Animation::step() {
 	++time;
 }
 
-void Animation::render(sf::RenderWindow* window, sf::Texture* texture, int x, int y, float z, int xs, int ys, bool mx, bool my, const sf::Color& color) {
-	Screen::renderSprite(window, texture[(time / interval) % frames], x, y, z, xs, ys, mx, my, 0, color);
+void Animation::render(sf::RenderWindow* window, sf::Texture* texture, int x, int y, float z, int xs, int ys, bool mx, bool my, float angle, const sf::Color& color) {
+	Screen::renderSprite(window, texture[(time / interval) % frames], x, y, z, xs, ys, mx, my, angle, color);
+}
+
+void Animation::renderOrig(sf::RenderWindow* window, sf::Texture* texture, int x, int y, float z, int xs, int ys, int width, int height, bool mx, bool my, float angle, const sf::Color& color) {
+	Screen::renderSpriteOrig(window, texture[(time / interval) % frames], x, y, z, xs, ys, width, height, mx, my, angle, color);
 }

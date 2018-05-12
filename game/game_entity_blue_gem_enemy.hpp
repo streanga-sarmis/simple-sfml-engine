@@ -17,13 +17,16 @@
 
 #include "game_item.hpp"
 #include "game_screen.hpp"
+#include "game_item_gem.hpp"
 #include "game_animation.hpp"
 #include "game_ai_manager.hpp"
 #include "game_item_manager.hpp"
+#include "game_item_shotgun.hpp"
+#include "game_boom_particle.hpp"
 #include "game_entity_manager.hpp"
 #include "game_wearing_entity.hpp"
 
-class AGuy : public WearingEntity {
+class BlueGemEnemy : public WearingEntity {
 private:
 	Animation IDLE;
 	Animation WALK;
@@ -34,8 +37,8 @@ private:
 
 public:
 
-	AGuy(float x, float y);
-	~AGuy();
+	BlueGemEnemy(float x, float y);
+	~BlueGemEnemy();
 
 	void touchedItem(Item* item) override;
 	void touchedEntity(Entity* other) override;

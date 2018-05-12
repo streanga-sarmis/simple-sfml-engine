@@ -32,5 +32,7 @@ public:
 	void initializeAnimation(unsigned frames, unsigned interval);
 	void step();
 	void render(sf::RenderWindow* window, sf::Texture* textures, int x, int y, float z, int xs, int ys, bool mx = false, bool my = false,
-		const sf::Color& color = sf::Color::White);
+		float angle = 0, const sf::Color& color = sf::Color::White);
+	void renderOrig(sf::RenderWindow* window, sf::Texture* texture, int x, int y, float z, int xs, int ys, int width, int height, bool mx = false, bool my = false,
+		float angle = 0, const sf::Color& color = sf::Color::White);
 };

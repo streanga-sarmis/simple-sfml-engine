@@ -32,4 +32,23 @@ public:
 			velocity.y = 11;
 		}
 	}
+
+	inline void updateOnGround() override {
+		oldBounds.x = bounds.left;
+		oldBounds.y = bounds.top;
+
+		if (!onHand) {
+			if (velocity.x < 4) {
+				if (velocity.y > 10) {
+					velocity.y *= -0.9;
+				}
+				else {
+					velocity.y += gravity;
+				}
+				velocity.x += 0.1;
+				bounds.left += velocity.x;
+				bounds.top += velocity.y;
+			}
+		}
+	}
 };

@@ -20,17 +20,30 @@ AnimationParticle::AnimationParticle(float x, float y, int lifetime) :
 }
 
 AnimationParticle::AnimationParticle(float x, float y, float angle, int lifetime) :
-	lifetime(lifetime) {
+	angle(angle), lifetime(lifetime) {
 	position.x = x;
 	position.y = y;
+
+	tileCollider.left = position.x;
+	tileCollider.top = position.y;
+	tileCollider.width = 32;
+	tileCollider.height = 32;
+
+	position.z = 0;
+	/*
 	if (angle) {
 		velocity.x = std::cos(angle * 3.14159265359 / 180) * speed;
 		velocity.y = std::sin(angle * 3.14159265359 / 180) * speed;
 	}
+	*/
 	canCollide = false;
 }
 
 AnimationParticle::~AnimationParticle() {
+
+}
+
+void AnimationParticle::touchedEntity(Entity* other) {
 
 }
 
@@ -39,7 +52,12 @@ void AnimationParticle::update(sf::RenderWindow* window, Map& map) {
 	if (lifetime <= 0) {
 		EntityManager::removeEntity(this);
 	}
+	/*
 	position.x += velocity.x;
 	position.x += velocity.y;
+	*/
+	tileCollider.left = position.x;
+	tileCollider.top = position.y;
+
 	frames.step();
 }

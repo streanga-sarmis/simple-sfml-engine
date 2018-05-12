@@ -77,7 +77,7 @@ void ItemManager::updateOffHand(Map& map) {
 
 			float x0 = (*it)->oldBounds.x; // a bit confusing and useless method to store change since I update both of them in the same time
 			float y0 = (*it)->oldBounds.y;
-			(*it)->update();
+			(*it)->updateOnGround();
 			float x1 = (*it)->bounds.left;
 			float y1 = (*it)->bounds.top;
 
@@ -129,7 +129,7 @@ void ItemManager::updateOnHand(Map& map) {
 
 			float x0 = (*it)->oldBounds.x;
 			float y0 = (*it)->oldBounds.y;
-			(*it)->update();
+			(*it)->updateOnGround();
 			float x1 = (*it)->bounds.left;
 			float y1 = (*it)->bounds.top;
 

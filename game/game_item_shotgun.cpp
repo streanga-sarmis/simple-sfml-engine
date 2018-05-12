@@ -69,3 +69,7 @@ void Shotgun::render(sf::RenderWindow* window, Textures& textures) {
 		Screen::renderSprite(window, textures.SHOTGUN, bounds.left + bounds.width / 2, bounds.top + bounds.height / 2, z, 2, 2, false, false, angle);
 	}
 }
+
+void Shotgun::renderIcon(sf::RenderWindow* window, Textures& textures, int x, int y, int z) {
+
+}
