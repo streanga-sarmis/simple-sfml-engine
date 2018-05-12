@@ -28,7 +28,7 @@ map(map){
 
 	for (int y = 0; y < map->height; ++y) {
 		for (int x = 0; x < map->width; ++x) {
-			if (std::rand() % 10 == 2 && map->collisionTiles[x + y * map->width].type) {
+			if (std::rand() % 3 == 2 && map->collisionTiles[x + y * map->width].type) {
 				EntityManager::addEntity(new BlueGemEnemy((x << 6), (y << 6)));
 			}
 		}

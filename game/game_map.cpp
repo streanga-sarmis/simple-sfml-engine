@@ -22,7 +22,7 @@ width(64), height(64){
 
 	noiseMap.randomizeData();
 	noiseMap.organizeData();
-
+	miniMap = noiseMap.miniMap;
 	tiles = new Tile[width * height];
 	overlayTiles = new Tile[width * height];
 	collisionTiles = new Tile[width * height];
@@ -110,6 +110,7 @@ void Map::renderOverlay(sf::RenderWindow* window, Textures& textures, int x0, in
 			}
 		}
 	}
+	//Screen::renderSprite(window, miniMap, 0, 0, 99999, 3, 3);
 }
 /*
 Map::Map():

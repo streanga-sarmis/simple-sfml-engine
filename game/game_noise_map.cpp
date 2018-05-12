@@ -17,6 +17,8 @@
 
 NoiseMap::NoiseMap(unsigned width, unsigned height):
 width(width), height(height){
+	miniMap.create(width, height);
+
 	std::srand(std::time(nullptr));
 	groundData = new char[width * height];
 	collisionData = new char[width * height];
@@ -40,7 +42,7 @@ NoiseMap::~NoiseMap() {
 void NoiseMap::randomizeData() {
 	int goDirectionX = width / 2;
 	int goDirectionY = height / 2;
-	int steps = 2000;
+	int steps = 4000;
 
 	groundData[goDirectionX + goDirectionY * width] = GROUND;
 	groundData[goDirectionX + 1 + goDirectionY * width] = GROUND;
@@ -247,4 +249,18 @@ void NoiseMap::organizeData(){
 			}
 		}
 	}
+	// making the minimap
+	//unsigned char* pixels = new unsigned char[width * height * 4];
+	/*
+	for (int i = 0; i < width * height * 4; i += 4) {
+		pixels[i + 0] = 255;//(groundData[i] << 24) & 0xff;
+		pixels[i + 1] = 255;//(groundData[i] << 16) & 0xff;
+		pixels[i + 2] = 255;//(groundData[i] << 8) & 0xff;
+		pixels[i + 3] = 255;//(groundData[i]) & 0xff;
+	}
+	*/
+	//miniMap.update((sf::Uint8*)pixels);
+
+	//miniMap.loadFromMemory(pixels, width * height);
+	//delete[] pixels;
 }

@@ -16,6 +16,7 @@
 #pragma once
 
 #include <iostream> // remove
+#include <SFML/Graphics.hpp>
 #include <ctime>
 
 #define SOLID 48
@@ -30,6 +31,7 @@
 
 class NoiseMap {
 public:
+	sf::Texture miniMap;
 	int checkDirection;
 	unsigned width;
 	unsigned height;

@@ -78,6 +78,7 @@ void Player::touchedItem(Item* item) {
 }
 
 void Player::touchedEntity(Entity* other) {
+
 }
 
 void Player::update(sf::RenderWindow* window, Map& map) {

@@ -29,6 +29,7 @@ private:
 	Tile* overlayTiles;
 
 public:
+	sf::Texture miniMap;
 	Tile* collisionTiles;
 	unsigned width;
 	unsigned height;
