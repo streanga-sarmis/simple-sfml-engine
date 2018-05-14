@@ -16,7 +16,7 @@
 #include "game_map.hpp"
 
 Map::Map():
-width(64), height(64){
+width(256), height(256){
 
 	NoiseMap noiseMap(width, height);
 

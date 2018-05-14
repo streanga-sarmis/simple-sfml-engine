@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -12,30 +10,26 @@
 //
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
-
 #pragma once
 
-#include "game_mob.hpp"
-#include "game_item.hpp"
-#include "game_stats.hpp"
-#include "game_item_gun.hpp"
-#include "game_item_helmet.hpp"
-#include "game_item_shoes.hpp"
-#include "game_item_chestplate.hpp"
+#include <SFML/Graphics.hpp>
 
-class WearingEntity : public Mob{
-protected:
-	//stats
-	Stats::Synergies synergies;
-	int currency;
-	// maybe put them in a equipable list??
-	Gun* gun = nullptr;
-	Shoes* shoes = nullptr;
-	Helmet* helmet = nullptr;
-	ChestPlate* chestplate = nullptr;
+#include "game_item.hpp"
+#include "game_textures.hpp"
+#include "game_wearing_entity.hpp"
+
+class Totem : public WearingEntity {
+private:
+	Item* item;
 
 public:
-	virtual void touchedItem(Item* item) = 0;
+	Totem(float x, float y);
+	~Totem();
 
-	friend class ConsumableItem;
+	void touchedItem(Item* item) override;
+	void touchedEntity(Entity* other) override;
+	void update(sf::RenderWindow* window, Map& map) override;
+	void render(sf::RenderWindow* window, Textures& textures) override;
+
+	friend class Player;
 };

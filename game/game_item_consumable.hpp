@@ -16,6 +16,7 @@
 #pragma once
 
 #include "game_item.hpp"
+#include "game_stats.hpp"
 #include "game_item_manager.hpp"
 
 class ConsumableItem : public Item {
@@ -24,6 +25,8 @@ protected:
 	Animation frames;
 
 public:
+	Stats::Synergies synergies;
+
 	inline void picked() {
 		ItemManager::removeItem(this);
 		// generate some kind of nice particle

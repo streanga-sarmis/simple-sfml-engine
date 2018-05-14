@@ -32,6 +32,7 @@ public:
 	static void addEntity(Entity* e);
 	static void removeEntity(Entity* e);
 	static void checkCollisions(Entity* th, Map& map);
+	Entity* getCollisionEntity(Entity* th, Map& map);
 	static void clearEntities();
 	static void initializeEntityMapping(Map& map);
 	static void update(sf::RenderWindow* windowm, Map& map);

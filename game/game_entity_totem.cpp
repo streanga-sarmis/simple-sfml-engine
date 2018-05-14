@@ -1,5 +1,3 @@
-//	Copyright (C) 2018 Streanga Sarmis-Stefan<streangasarmis@gmail.com>
-//
 //	This program is free software : you can redistribute it and / or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
@@ -13,29 +11,35 @@
 //	You should have received a copy of the GNU General Public License
 //	along with this program, if not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include "game_entity_totem.hpp"
 
-#include "game_mob.hpp"
-#include "game_item.hpp"
-#include "game_stats.hpp"
-#include "game_item_gun.hpp"
-#include "game_item_helmet.hpp"
-#include "game_item_shoes.hpp"
-#include "game_item_chestplate.hpp"
+Totem::Totem(float x, float y) {
+	position.x = x;
+	position.y = y;
 
-class WearingEntity : public Mob{
-protected:
-	//stats
-	Stats::Synergies synergies;
-	int currency;
-	// maybe put them in a equipable list??
-	Gun* gun = nullptr;
-	Shoes* shoes = nullptr;
-	Helmet* helmet = nullptr;
-	ChestPlate* chestplate = nullptr;
+	tileCollider.left = position.x;
+	tileCollider.top = position.y;
+	tileCollider.width = 128;
+	tileCollider.height = 128;
 
-public:
-	virtual void touchedItem(Item* item) = 0;
+	entityCollider.left = position.x;
+	entityCollider.top = position.y;
+	entityCollider.width = 128;
+	entityCollider.height = 128;
+}
 
-	friend class ConsumableItem;
-};
+Totem::~Totem() {
+
+}
+
+void Totem::touchedItem(Item* item) {
+}
+
+void Totem::touchedEntity(Entity* other) {
+}
+
+void Totem::update(sf::RenderWindow* window, Map& map) {
+
+}
+void Totem::render(sf::RenderWindow* window, Textures& textures) {
+}

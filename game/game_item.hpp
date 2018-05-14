@@ -22,6 +22,7 @@
 class Item {
 public:
 	// add the pickup interval here, not on the entity part
+	// idk when I wrote the comment above ^ but I must've been stupid to do so
 	sf::Vector2f oldBounds;
 	sf::Vector2f velocity;
 	sf::FloatRect bounds;
@@ -31,10 +32,6 @@ public:
 	bool mirrorX = false;
 	bool onHand = false;
 	int bonusCurrency;
-	int bonusReg;
-	int bonusAmmo;
-	int bonusHeath;
-	int bonusSpeed;
 	float angle;
 
 	inline void setOnHand(bool onHand) {

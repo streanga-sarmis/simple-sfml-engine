@@ -150,9 +150,6 @@
     <ClCompile Include="game_ai_manager.cpp">
       <Filter>Source Files\ai</Filter>
     </ClCompile>
-    <ClCompile Include="game_entity_fairy.cpp">
-      <Filter>Source Files\entities\mobs</Filter>
-    </ClCompile>
     <ClCompile Include="game_stats.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -176,6 +173,12 @@
     </ClCompile>
     <ClCompile Include="game_entity_blue_gem_enemy.cpp">
       <Filter>Source Files\entities\mobs</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_fairy.cpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClCompile>
+    <ClCompile Include="game_entity_totem.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,9 +287,6 @@
     <ClInclude Include="game_ai_manager.hpp">
       <Filter>Source Files\ai</Filter>
     </ClInclude>
-    <ClInclude Include="game_entity_fairy.hpp">
-      <Filter>Source Files\entities\mobs</Filter>
-    </ClInclude>
     <ClInclude Include="game_stats.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -328,6 +328,12 @@
     </ClInclude>
     <ClInclude Include="game_entity_blue_gem_enemy.hpp">
       <Filter>Source Files\entities\mobs</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_fairy.hpp">
+      <Filter>Source Files\entities\mobs</Filter>
+    </ClInclude>
+    <ClInclude Include="game_entity_totem.hpp">
+      <Filter>Source Files\entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

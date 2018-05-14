@@ -143,6 +143,7 @@
     <ClCompile Include="game_entity_fairy.cpp" />
     <ClCompile Include="game_entity_manager.cpp" />
     <ClCompile Include="game_entity_player.cpp" />
+    <ClCompile Include="game_entity_totem.cpp" />
     <ClCompile Include="game_hud.cpp" />
     <ClCompile Include="game_impact_particle.cpp" />
     <ClCompile Include="game_item_ak.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="game_entity_fairy.hpp" />
     <ClInclude Include="game_entity_manager.hpp" />
     <ClInclude Include="game_entity_player.hpp" />
+    <ClInclude Include="game_entity_totem.hpp" />
     <ClInclude Include="game_hud.hpp" />
     <ClInclude Include="game_impact_particle.hpp" />
     <ClInclude Include="game_item.hpp" />

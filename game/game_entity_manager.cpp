@@ -54,6 +54,36 @@ void EntityManager::checkCollisions(Entity* th, Map& map) {
 	}
 }
 
+Entity* EntityManager::getCollisionEntity(Entity* th, Map& map) {
+	int x0 = ((int)(th->entityCollider.left) >> 6) - 1;
+	int y0 = ((int)(th->entityCollider.top) >> 6) - 1;
+	int x1 = ((int)(th->entityCollider.left) >> 6) + 1;
+	int y1 = ((int)(th->entityCollider.top) >> 6) + 1;
+
+	if (x0 >= 0 && x1 < map.width && y0 >= 0 && y1 < map.height) {
+		for (int y = y0; y < y1; ++y) {
+			for (int x = x0; x < x1; ++x) {
+				for (std::list<Entity*>::iterator it = entitiesInTiles[x + y * map.width].begin();
+					it != entitiesInTiles[x + y * map.width].end();) {
+					// remember to make collision bounds
+					if ((*it) != th) {
+						if (th->entityCollider.intersects((*it)->entityCollider)) {
+							return *it++;
+						}
+						else {
+							*it++;
+						}
+					}
+					else {
+						*it++;
+					}
+				}
+			}
+		}
+	}
+	return nullptr;
+}
+
 void EntityManager::clearEntities() {
 	for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end();){
 		delete *it++;

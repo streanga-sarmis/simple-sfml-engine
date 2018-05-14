@@ -28,10 +28,6 @@ Gem::Gem(int x, int y) {
 	currentIcon = std::rand() % 2;
 
 	bonusCurrency = 1;
-	bonusAmmo = 0;
-	bonusHeath = 0;
-	bonusReg = 0;
-	bonusSpeed = 0;
 }
 
 Gem::~Gem() {

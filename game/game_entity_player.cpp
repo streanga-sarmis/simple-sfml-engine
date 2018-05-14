@@ -24,8 +24,8 @@ Player::Player() {
 	IDLE.initializeAnimation(4, 10);
 	WALK.initializeAnimation(8, 5);
 
-	position.x = 64 * 32;
-	position.y = 64 * 32;
+	position.x = 256 * 32;
+	position.y = 256 * 32;
 	
 	velocity.x = 0;
 	velocity.y = 0;
@@ -69,10 +69,7 @@ void Player::touchedItem(Item* item) {
 	} else if(Util::isType<Item, ConsumableItem>(item)) {
 		ConsumableItem* pickedOne = dynamic_cast<ConsumableItem*>(item);
 		currency += pickedOne->bonusCurrency;
-		ammobonus += pickedOne->bonusAmmo;
-		health += pickedOne->bonusHeath;
-		regeneration += pickedOne->bonusReg;
-		speedbonus += pickedOne->bonusSpeed;
+		synergies.addStats(pickedOne->synergies); // add the synergy effects to the right things in the bullets and mobs class
 		pickedOne->picked();
 	}
 }
